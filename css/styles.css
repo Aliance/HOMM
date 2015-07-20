@@ -1,0 +1,126 @@
+#container {
+    position: relative;
+}
+
+.tile-container {
+    overflow: hidden;
+}
+
+.tile {
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    float: left;
+    /* DEBUG */
+    color: black;
+    text-shadow: 1px 1px 1px white;
+    font-size: 10px;
+    line-height: 32px;
+    text-align: center;
+}
+
+/* ТРАВА */
+
+/*
+ * 1-19 трава
+ * 59-62 берег около угла
+ * 63-66 верт. берег
+ * 67-70 гор. берег
+ * 71-74, 77-78 внутренний угол (больше песка)
+ * 75-76 внутренний угол (больше травы)
+ */
+
+.tile--grass {
+    background-image: url('../images/tiles/grass.bmp');
+}
+
+/* ВОДА */
+
+/*
+ * 4-7 верт. водный берег
+ * 8-11 гор. водный берег
+ * 12-15 18-19 уголочки
+ * 16-17 большой угол
+ */
+
+.tile--water {
+    background-image: url('../images/tiles/water.bmp');
+}
+
+/* ПОВОРОТ */
+
+.tile--position-0 {
+    transform: rotate(1turn);
+}
+
+.tile--position-1 {
+    transform: rotate(0.25turn);
+}
+
+.tile--position-2 {
+    transform: rotate(0.5turn);
+}
+
+.tile--position-3 {
+    transform: rotate(0.75turn);
+}
+
+/* КОНКРЕТНЫЙ ТАЙЛ */
+
+.tile--0 { background-position-x: 0px; }
+.tile--1 { background-position-x: -33px; }
+.tile--2 { background-position-x: -66px; }
+.tile--3 { background-position-x: -99px; }
+.tile--4 { background-position-x: -132px; }
+.tile--5 { background-position-x: -165px; }
+.tile--6 { background-position-x: -198px; }
+.tile--7 { background-position-x: -231px; }
+.tile--8 { background-position-x: -264px; }
+.tile--9 { background-position-x: -297px; }
+.tile--10 { background-position-x: -330px; }
+.tile--11 { background-position-x: -363px; }
+.tile--12 { background-position-x: -396px; }
+.tile--13 { background-position-x: -429px; }
+.tile--14 { background-position-x: -462px; }
+.tile--15 { background-position-x: -495px; }
+.tile--16 { background-position-x: -528px; }
+.tile--17 { background-position-x: -561px; }
+.tile--18 { background-position-x: -594px; }
+.tile--19 { background-position-x: -627px; }
+.tile--20 { background-position-x: -660px; }
+.tile--21 { background-position-x: -693px; }
+.tile--22 { background-position-x: -726px; }
+.tile--23 { background-position-x: -759px; }
+.tile--24 { background-position-x: -792px; }
+.tile--25 { background-position-x: -825px; }
+.tile--26 { background-position-x: -858px; }
+.tile--27 { background-position-x: -891px; }
+.tile--28 { background-position-x: -924px; }
+.tile--29 { background-position-x: -957px; }
+.tile--30 { background-position-x: -990px; }
+.tile--31 { background-position-x: -1023px; }
+.tile--32 { background-position-x: -1056px; }
+
+.tile--58 { background-position-x: -1914px; }
+.tile--59 { background-position-x: -1947px; }
+.tile--60 { background-position-x: -1980px; }
+.tile--61 { background-position-x: -2013px; }
+.tile--62 { background-position-x: -2046px; }
+.tile--63 { background-position-x: -2079px; }
+.tile--64 { background-position-x: -2112px; }
+.tile--65 { background-position-x: -2145px; }
+.tile--66 { background-position-x: -2178px; }
+.tile--67 { background-position-x: -2211px; }
+.tile--68 { background-position-x: -2244px; }
+.tile--69 { background-position-x: -2277px; }
+.tile--70 { background-position-x: -2310px; }
+.tile--71 { background-position-x: -2343px; }
+
+.tile--72 { background-position-x: -2376px; }
+.tile--73 { background-position-x: -2409px; }
+.tile--74 { background-position-x: -2442px; }
+.tile--75 { background-position-x: -2475px; }
+.tile--76 { background-position-x: -2508px; }
+.tile--77 { background-position-x: -2541px; }
+.tile--78 { background-position-x: -2574px; }
