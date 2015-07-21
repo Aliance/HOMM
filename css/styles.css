@@ -58,18 +58,26 @@
 /* ПОВОРОТ */
 
 .tile--position-0 {
+    -webkit-transform: rotate(1turn);
+    -ms-transform: rotate(1turn);
     transform: rotate(1turn);
 }
 
 .tile--position-1 {
+    -webkit-transform: rotate(0.25turn);
+    -ms-transform: rotate(0.25turn);
     transform: rotate(0.25turn);
 }
 
 .tile--position-2 {
+    -webkit-transform: rotate(0.5turn);
+    -ms-transform: rotate(0.5turn);
     transform: rotate(0.5turn);
 }
 
 .tile--position-3 {
+    -webkit-transform: rotate(0.75turn);
+    -ms-transform: rotate(0.75turn);
     transform: rotate(0.75turn);
 }
 
