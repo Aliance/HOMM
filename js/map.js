@@ -192,6 +192,26 @@ $(function() {
         $tileContainer.addClass('tile-container').appendTo($container);
     }
 
-    var Overlord = new Hero('overlord');
-    Overlord.draw();
+    var availableTypes = [
+        'alchemist',
+        'barbarian',
+        'battle-mage',
+        'beastmaster',
+        'cleric',
+        'death-knight',
+        'demoniac',
+        'druid',
+        'heretic',
+        'knight',
+        'necromancer',
+        'overlord',
+        'ranger',
+        'warlock',
+        'witch'
+    ];
+    var randomIndex = Math.floor(Math.random() * availableTypes.length);
+    var type = availableTypes[randomIndex];
+
+    var hero = new Hero(type);
+    hero.draw();
 });

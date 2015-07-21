@@ -1,4 +1,26 @@
 function Hero(type) {
+    var availableTypes = [
+        'alchemist',
+        'barbarian',
+        'battle-mage',
+        'beastmaster',
+        'cleric',
+        'death-knight',
+        'demoniac',
+        'druid',
+        'heretic',
+        'knight',
+        'necromancer',
+        'overlord',
+        'ranger',
+        'warlock',
+        'witch'
+    ];
+
+    if ($.inArray(type, availableTypes) === -1) {
+        throw new Error('Unknown hero type "' + type + '"');
+    }
+
     this.type = type;
 
     this.draw = function() {

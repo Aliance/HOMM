@@ -7,6 +7,8 @@
 
 #container {
     position: relative;
+    display: inline-block;
+    cursor: url('../images/cursors/arrow.png'), default;
 }
 
 .tile-container {
@@ -40,6 +42,7 @@
 
 .tile--grass {
     background-image: url('../images/tiles/grass.bmp');
+    cursor: url('../images/cursors/move.png'), default;
 }
 
 /* ВОДА */
@@ -83,62 +86,85 @@
 
 /* КОНКРЕТНЫЙ ТАЙЛ */
 
-.tile--0 { background-position-x: 0px; }
-.tile--1 { background-position-x: -33px; }
-.tile--2 { background-position-x: -66px; }
-.tile--3 { background-position-x: -99px; }
-.tile--4 { background-position-x: -132px; }
-.tile--5 { background-position-x: -165px; }
-.tile--6 { background-position-x: -198px; }
-.tile--7 { background-position-x: -231px; }
-.tile--8 { background-position-x: -264px; }
-.tile--9 { background-position-x: -297px; }
-.tile--10 { background-position-x: -330px; }
-.tile--11 { background-position-x: -363px; }
-.tile--12 { background-position-x: -396px; }
-.tile--13 { background-position-x: -429px; }
-.tile--14 { background-position-x: -462px; }
-.tile--15 { background-position-x: -495px; }
-.tile--16 { background-position-x: -528px; }
-.tile--17 { background-position-x: -561px; }
-.tile--18 { background-position-x: -594px; }
-.tile--19 { background-position-x: -627px; }
-.tile--20 { background-position-x: -660px; }
-.tile--21 { background-position-x: -693px; }
-.tile--22 { background-position-x: -726px; }
-.tile--23 { background-position-x: -759px; }
-.tile--24 { background-position-x: -792px; }
-.tile--25 { background-position-x: -825px; }
-.tile--26 { background-position-x: -858px; }
-.tile--27 { background-position-x: -891px; }
-.tile--28 { background-position-x: -924px; }
-.tile--29 { background-position-x: -957px; }
-.tile--30 { background-position-x: -990px; }
-.tile--31 { background-position-x: -1023px; }
-.tile--32 { background-position-x: -1056px; }
-
-.tile--58 { background-position-x: -1914px; }
-.tile--59 { background-position-x: -1947px; }
-.tile--60 { background-position-x: -1980px; }
-.tile--61 { background-position-x: -2013px; }
-.tile--62 { background-position-x: -2046px; }
-.tile--63 { background-position-x: -2079px; }
-.tile--64 { background-position-x: -2112px; }
-.tile--65 { background-position-x: -2145px; }
-.tile--66 { background-position-x: -2178px; }
-.tile--67 { background-position-x: -2211px; }
-.tile--68 { background-position-x: -2244px; }
-.tile--69 { background-position-x: -2277px; }
-.tile--70 { background-position-x: -2310px; }
-.tile--71 { background-position-x: -2343px; }
-
-.tile--72 { background-position-x: -2376px; }
-.tile--73 { background-position-x: -2409px; }
-.tile--74 { background-position-x: -2442px; }
-.tile--75 { background-position-x: -2475px; }
-.tile--76 { background-position-x: -2508px; }
-.tile--77 { background-position-x: -2541px; }
-.tile--78 { background-position-x: -2574px; }
+.tile--0  { background-position: 0 0; }
+.tile--1  { background-position: -33px   0; }
+.tile--2  { background-position: -66px   0; }
+.tile--3  { background-position: -99px   0; }
+.tile--4  { background-position: -132px  0; }
+.tile--5  { background-position: -165px  0; }
+.tile--6  { background-position: -198px  0; }
+.tile--7  { background-position: -231px  0; }
+.tile--8  { background-position: -264px  0; }
+.tile--9  { background-position: -297px  0; }
+.tile--10 { background-position: -330px  0; }
+.tile--11 { background-position: -363px  0; }
+.tile--12 { background-position: -396px  0; }
+.tile--13 { background-position: -429px  0; }
+.tile--14 { background-position: -462px  0; }
+.tile--15 { background-position: -495px  0; }
+.tile--16 { background-position: -528px  0; }
+.tile--17 { background-position: -561px  0; }
+.tile--18 { background-position: -594px  0; }
+.tile--19 { background-position: -627px  0; }
+.tile--20 { background-position: -660px  0; }
+.tile--21 { background-position: -693px  0; }
+.tile--22 { background-position: -726px  0; }
+.tile--23 { background-position: -759px  0; }
+.tile--24 { background-position: -792px  0; }
+.tile--25 { background-position: -825px  0; }
+.tile--26 { background-position: -858px  0; }
+.tile--27 { background-position: -891px  0; }
+.tile--28 { background-position: -924px  0; }
+.tile--29 { background-position: -957px  0; }
+.tile--30 { background-position: -990px  0; }
+.tile--31 { background-position: -1023px 0; }
+.tile--32 { background-position: -1056px 0; }
+.tile--33 { background-position: -1089px 0; }
+.tile--34 { background-position: -1122px 0; }
+.tile--35 { background-position: -1155px 0; }
+.tile--36 { background-position: -1188px 0; }
+.tile--37 { background-position: -1221px 0; }
+.tile--38 { background-position: -1254px 0; }
+.tile--39 { background-position: -1287px 0; }
+.tile--40 { background-position: -1320px 0; }
+.tile--41 { background-position: -1353px 0; }
+.tile--42 { background-position: -1386px 0; }
+.tile--43 { background-position: -1419px 0; }
+.tile--44 { background-position: -1452px 0; }
+.tile--45 { background-position: -1485px 0; }
+.tile--46 { background-position: -1518px 0; }
+.tile--47 { background-position: -1551px 0; }
+.tile--48 { background-position: -1584px 0; }
+.tile--49 { background-position: -1617px 0; }
+.tile--50 { background-position: -1650px 0; }
+.tile--51 { background-position: -1683px 0; }
+.tile--52 { background-position: -1716px 0; }
+.tile--53 { background-position: -1749px 0; }
+.tile--54 { background-position: -1782px 0; }
+.tile--55 { background-position: -1815px 0; }
+.tile--56 { background-position: -1848px 0; }
+.tile--57 { background-position: -1881px 0; }
+.tile--58 { background-position: -1914px 0; }
+.tile--59 { background-position: -1947px 0; }
+.tile--60 { background-position: -1980px 0; }
+.tile--61 { background-position: -2013px 0; }
+.tile--62 { background-position: -2046px 0; }
+.tile--63 { background-position: -2079px 0; }
+.tile--64 { background-position: -2112px 0; }
+.tile--65 { background-position: -2145px 0; }
+.tile--66 { background-position: -2178px 0; }
+.tile--67 { background-position: -2211px 0; }
+.tile--68 { background-position: -2244px 0; }
+.tile--69 { background-position: -2277px 0; }
+.tile--70 { background-position: -2310px 0; }
+.tile--71 { background-position: -2343px 0; }
+.tile--72 { background-position: -2376px 0; }
+.tile--73 { background-position: -2409px 0; }
+.tile--74 { background-position: -2442px 0; }
+.tile--75 { background-position: -2475px 0; }
+.tile--76 { background-position: -2508px 0; }
+.tile--77 { background-position: -2541px 0; }
+.tile--78 { background-position: -2574px 0; }
 
 /* ОБЪЕКТЫ */
 
@@ -147,13 +173,73 @@
 }
 
 .object--hero {
-    width: 96px;
-    height: 64px;
+    width: 44px;
+    height: 59px;
     position: absolute;
-    background-color: transparent;
-    background-repeat: no-repeat;
+    background: transparent no-repeat 50% 50%;
+    cursor: url('../images/cursors/hero.png'), default;
+}
+
+.object--hero--alchemist {
+    background-image: url(../images/heroes/alchemist/frame_02.png);
+}
+
+.object--hero--barbarian {
+    background-image: url(../images/heroes/barbarian/frame_02.png);
+}
+
+.object--hero--battle-mage {
+    background-image: url(../images/heroes/battle_mage/frame_02.png);
+}
+
+.object--hero--beastmaster {
+    background-image: url(../images/heroes/beastmaster/frame_02.png);
+}
+
+.object--hero--cleric {
+    background-image: url(../images/heroes/cleric/frame_02.png);
+}
+
+.object--hero--death-knight {
+    background-image: url(../images/heroes/death_knight/frame_02.png);
+}
+
+.object--hero--demoniac {
+    background-image: url(../images/heroes/demoniac/frame_02.png);
+}
+
+.object--hero--druid {
+    background-image: url(../images/heroes/druid/frame_02.png);
+}
+
+.object--hero--heretic {
+    background-image: url(../images/heroes/heretic/frame_02.png);
+}
+
+.object--hero--knight {
+    background-image: url(../images/heroes/knight/frame_02.png);
+}
+
+.object--hero--necromancer {
+    background-image: url(../images/heroes/necromancer/frame_02.png);
 }
 
 .object--hero--overlord {
     background-image: url(../images/heroes/overlord/frame_02.png);
+}
+
+.object--hero--ranger {
+    background-image: url(../images/heroes/ranger/frame_02.png);
+}
+
+.object--hero--warlock {
+    background-image: url(../images/heroes/warlock/frame_02.png);
+}
+
+.object--hero--witch {
+    background-image: url(../images/heroes/witch/frame_02.png);
+}
+
+.object--hero--wizard {
+    background-image: url(../images/heroes/wizard/frame_02.png);
 }
