@@ -61,27 +61,35 @@
 /* ПОВОРОТ */
 
 .tile--position-0 {
+    -moz-transform:    rotate(1turn);
+    -ms-transform:     rotate(1turn);
     -webkit-transform: rotate(1turn);
-    -ms-transform: rotate(1turn);
-    transform: rotate(1turn);
+    -o-transform:      rotate(1turn);
+    transform:         rotate(1turn);
 }
 
 .tile--position-1 {
+    -moz-transform:    rotate(0.25turn);
+    -ms-transform:     rotate(0.25turn);
     -webkit-transform: rotate(0.25turn);
-    -ms-transform: rotate(0.25turn);
-    transform: rotate(0.25turn);
+    -o-transform:      rotate(0.25turn);
+    transform:         rotate(0.25turn);
 }
 
 .tile--position-2 {
+    -moz-transform:    rotate(0.5turn);
+    -ms-transform:     rotate(0.5turn);
     -webkit-transform: rotate(0.5turn);
-    -ms-transform: rotate(0.5turn);
-    transform: rotate(0.5turn);
+    -o-transform:      rotate(0.5turn);
+    transform:         rotate(0.5turn);
 }
 
 .tile--position-3 {
+    -moz-transform:    rotate(0.75turn);
+    -ms-transform:     rotate(0.75turn);
     -webkit-transform: rotate(0.75turn);
-    -ms-transform: rotate(0.75turn);
-    transform: rotate(0.75turn);
+    -o-transform:      rotate(0.75turn);
+    transform:         rotate(0.75turn);
 }
 
 /* КОНКРЕТНЫЙ ТАЙЛ */
@@ -171,6 +179,19 @@
 .object {
     z-index: 100;
 }
+
+/* ЗЕРКАЛЬНОЕ ОТРАЖЕНИЕ */
+
+.object--flip {
+    -moz-transform:    scaleX(-1);
+    -o-transform:      scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform:         scaleX(-1);
+    filter:      FlipX;
+    -ms-filter: "FlipX";
+}
+
+/* ГЕРОИ */
 
 .object--hero {
     width: 44px;

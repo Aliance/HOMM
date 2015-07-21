@@ -26,6 +26,7 @@ function Hero(type) {
     this.draw = function() {
         $('<div>')
             .addClass('object object--hero object--hero--' + this.type)
+            .addClass(random(0, 1) ? 'object--flip' : '')
             .css({
                 left: random(150, 750) + 'px',
                 top: random(100, 400) + 'px'
