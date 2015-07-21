@@ -139,3 +139,21 @@
 .tile--76 { background-position-x: -2508px; }
 .tile--77 { background-position-x: -2541px; }
 .tile--78 { background-position-x: -2574px; }
+
+/* ОБЪЕКТЫ */
+
+.object {
+    z-index: 100;
+}
+
+.object--hero {
+    width: 96px;
+    height: 64px;
+    position: absolute;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.object--hero--overlord {
+    background-image: url(../images/heroes/overlord/frame_02.png);
+}
