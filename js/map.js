@@ -209,8 +209,7 @@ $(function() {
         'warlock',
         'witch'
     ];
-    var randomIndex = Math.floor(Math.random() * availableTypes.length);
-    var type = availableTypes[randomIndex];
+    var type = availableTypes[random(0, availableTypes.length - 1)];
 
     var hero = new Hero(type);
     hero.draw();
