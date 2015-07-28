@@ -264,3 +264,28 @@
 .object--hero--wizard {
     background-image: url(../images/heroes/wizard/frame_02.png);
 }
+
+/* DEBUG */
+
+.hero {
+    outline: 1px dotted #444;
+}
+
+.grass, .border {
+    line-height: 32px !important;
+    text-align: center;
+}
+
+.grass {
+    background-image: url('../images/grass2.png');
+}
+
+.border {
+    background-image: url('../images/border_test.png');
+}
+
+.test {
+    outline: 1px solid #000;
+    background: blue;
+    z-index: 90 !important;
+}
