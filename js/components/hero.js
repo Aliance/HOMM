@@ -4,7 +4,7 @@ Crafty.c('hero', {
         this.marginLeft = 6;
 
         this.requires('grid')
-            .addComponent('SpriteAnimation, Tween, Collision')
+            .addComponent('SpriteAnimation, Tween, Collision, MoveTo')
             // TODO: debug
             //.addComponent('VisibleMBR')
             .addComponent('SolidHitBox')
