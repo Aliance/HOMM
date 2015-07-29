@@ -22,6 +22,20 @@ Game = {
             },
             zIndex: 2
         },
+        resource: {
+            tile: {
+                width:  32,
+                height: 32
+            },
+            zIndex: 3
+        },
+        treasureChest: {
+            tile: {
+                width:  32,
+                height: 32
+            },
+            zIndex: 3
+        },
         hero: {
             tile: {
                 width:  50,

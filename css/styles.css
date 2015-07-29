@@ -265,7 +265,7 @@
     background-image: url(../images/heroes/wizard/frame_02.png);
 }
 
-/* DEBUG */
+/* temp */
 
 .hero {
     outline: 1px dotted #444;
@@ -277,13 +277,39 @@
 }
 
 .grass {
-    background-image: url('../images/grass2.png');
+    background-image: url('../images/grass.png');
 }
 
 .border {
-    background-image: url('../images/border_test.png');
+    background-image: url('../images/border.png');
 }
-
+/* items */
+.treasure-chest {
+    background-image: url('../images/treasure-chest.png');
+}
+/* resources */
+.gold {
+    background-image: url('../images/gold.png');
+}
+.wood {
+    background-image: url('../images/wood.png');
+}
+.ore {
+    background-image: url('../images/ore.png');
+}
+.gem {
+    background-image: url('../images/gem.png');
+}
+.crystal {
+    background-image: url('../images/crystal.png');
+}
+.sulphur {
+    background-image: url('../images/sulphur.png');
+}
+.mercury {
+    background-image: url('../images/mercury.png');
+}
+/* debug */
 .test {
     outline: 1px solid #000;
     background: blue;

@@ -126,7 +126,8 @@ Crafty.c('hero', {
 
         this.animate('walk_'+ o)
             .bind('AnimationEnd', function() {
-                this.unbind('AnimationEnd');
+                this.stand(o)
+                    .unbind('AnimationEnd');
             })
             .tween(tween, Game.components.hero.moveDuration)
         ;
@@ -137,14 +138,19 @@ Crafty.c('hero', {
      */
     initCollision: function() {
         var polygon = new Crafty.polygon(
-            [this.marginLeft + 1,                        Game.components.hero.tile.height - Game.grid.tile.height + 1],
-            [this.marginLeft + 1,                        Game.components.hero.tile.height - 1],
+            // top left
+            [this.marginLeft + 2,                        Game.components.hero.tile.height - Game.grid.tile.height + 1],
+            // bottom left
+            [this.marginLeft + 2,                        Game.components.hero.tile.height - 1],
+            // bottom right
             [this.marginLeft + Game.grid.tile.width - 1, Game.components.hero.tile.height - 1],
+            // top right
             [this.marginLeft + Game.grid.tile.width - 1, Game.components.hero.tile.height - Game.grid.tile.height + 1]
         );
 
         this.collision(polygon)
             .onHit('border', this.stopMovement)
+            //.onHit('treasure-chest', this.stopMovement)
         ;
 
         return this;
@@ -157,6 +163,7 @@ Crafty.c('hero', {
         console.log('[hit] %O', hitData[0].obj);
 
         this.cancelTween(this);
+        return;
 
         console.log('orientation: ', this._orientation);
         console.log('hero: %O', this);
