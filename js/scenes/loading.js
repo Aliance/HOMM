@@ -9,10 +9,7 @@ Crafty.defineScene('Loading', function() {
 
     var assets = {
         'images': [
-            './images/treasure-chest.png',
-            './images/gold.png',
-            './images/grass.png',
-            './images/border.png'
+            './images/treasure-chest.png'
         ],
         'sprites': {
             './images/heroes/death-knight.png': {
