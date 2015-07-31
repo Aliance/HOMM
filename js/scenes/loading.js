@@ -16,9 +16,14 @@ Crafty.defineScene('Loading', function() {
         ],
         'sprites': {
             './images/heroes/death-knight.png': {
-                tile: 50,
-                tileh: 59,
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
                 map: Game.components.hero.getMap()
+            },
+            './images/resources/tiles.png': {
+                tile: Game.components.resource.tile.width,
+                tileh: Game.components.resource.tile.height,
+                map: Game.components.resource.getMap()
             }
         }
     };
@@ -27,6 +32,7 @@ Crafty.defineScene('Loading', function() {
         assets,
         function() {
             Game.components.hero.createAnimation();
+            Game.components.resource.createAnimation();
 
             Crafty.enterScene('Game');
         },

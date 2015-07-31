@@ -1,6 +1,10 @@
 Crafty.c('crystal', {
     init: function() {
-        this.requires('resource');
+        this.requires('resource')
+            .addComponent('SpriteAnimation, shining--crystal')
+            .reel('shining', Game.components.resource.animationDuration, Game.components.resource.animation['crystal'])
+            .animate('shining', -1)
+        ;
     },
 
     remove: function(isDestroyed) {

@@ -1,6 +1,8 @@
 Crafty.c('wood', {
     init: function() {
-        this.requires('resource');
+        this.requires('resource')
+            .addComponent('shining--wood')
+        ;
     },
 
     remove: function(isDestroyed) {

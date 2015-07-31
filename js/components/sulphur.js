@@ -1,6 +1,8 @@
 Crafty.c('sulphur', {
     init: function() {
-        this.requires('resource');
+        this.requires('resource')
+            .addComponent('shining--sulphur')
+        ;
     },
 
     remove: function(isDestroyed) {

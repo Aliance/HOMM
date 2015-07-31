@@ -1,6 +1,8 @@
 Crafty.c('ore', {
     init: function() {
-        this.requires('resource');
+        this.requires('resource')
+            .addComponent('shining--ore')
+        ;
     },
 
     remove: function(isDestroyed) {
