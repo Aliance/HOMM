@@ -33,13 +33,14 @@ Game = {
             getMap: function() {
                 var positions = {};
 
-                positions['shining--gold']    = [0, 0];
-                positions['shining--mercury'] = [0, 1];
-                positions['shining--sulphur'] = [0, 2];
-                positions['shining--gem']     = [0, 3];
-                positions['shining--crystal'] = [0, 4];
-                positions['shining--wood']    = [0, 5];
-                positions['shining--ore']     = [0, 6];
+                positions['shining--gold']           = [0, 0];
+                positions['shining--treasure-chest'] = [0, 1];
+                positions['shining--sulphur']        = [0, 2];
+                positions['shining--mercury']        = [1, 2];
+                positions['shining--wood']           = [2, 2];
+                positions['shining--ore']            = [3, 2];
+                positions['shining--gem']            = [0, 3];
+                positions['shining--crystal']        = [0, 4];
 
                 return positions;
             },
@@ -54,13 +55,10 @@ Game = {
                     return map;
                 };
 
-                Game.components.resource.animation['gold']    = createAnimationMap(0, 7, 0);
-                Game.components.resource.animation['mercury'] = createAnimationMap(0, 0, 1);
-                Game.components.resource.animation['sulphur'] = createAnimationMap(0, 0, 2);
-                Game.components.resource.animation['gem']     = createAnimationMap(0, 7, 3);
-                Game.components.resource.animation['crystal'] = createAnimationMap(0, 7, 4);
-                Game.components.resource.animation['wood']    = createAnimationMap(0, 0, 5);
-                Game.components.resource.animation['ore']     = createAnimationMap(0, 0, 6);
+                Game.components.resource.animation['gold']           = createAnimationMap(0, 7, 0);
+                Game.components.resource.animation['treasure-chest'] = createAnimationMap(0, 7, 1);
+                Game.components.resource.animation['gem']            = createAnimationMap(0, 7, 3);
+                Game.components.resource.animation['crystal']        = createAnimationMap(0, 7, 4);
             }
         },
         treasureChest: {

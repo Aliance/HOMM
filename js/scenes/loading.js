@@ -8,9 +8,6 @@ Crafty.defineScene('Loading', function() {
     Crafty.background('#ccc');
 
     var assets = {
-        'images': [
-            './images/treasure-chest.png'
-        ],
         'sprites': {
             './images/heroes/death-knight.png': {
                 tile: Game.components.hero.tile.width,

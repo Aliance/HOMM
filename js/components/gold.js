@@ -10,7 +10,12 @@ Crafty.c('gold', {
     remove: function(isDestroyed) {
         if (!isDestroyed) return;
 
-        var amount = Crafty.math.randomInt(500, 1000);
+        var availableAmounts = [
+            500, 550, 600, 650,
+            700, 750, 800, 850,
+            900, 950, 1000
+        ];
+        var amount = Crafty.math.randomElementOfArray(availableAmounts);
         console.log('pick up gold: ' + amount);
     }
 });

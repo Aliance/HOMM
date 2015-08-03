@@ -7,6 +7,9 @@
 Crafty.c('treasure-chest', {
     init: function() {
         this.requires('grid')
+            .addComponent('SpriteAnimation, shining--treasure-chest')
+            .reel('shining', Game.components.resource.animationDuration, Game.components.resource.animation['treasure-chest'])
+            .animate('shining', -1)
             .addComponent('Collision')
             .onHit('hero', this.pickUp)
             .attr({
