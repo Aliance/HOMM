@@ -11,6 +11,7 @@ Crafty.c('treasure-chest', {
             .reel('shining', Game.components.resource.animationDuration, Game.components.resource.animation['treasure-chest'])
             .animate('shining', -1)
             .addComponent('Collision')
+            .addComponent('SolidHitBox')
             .onHit('hero', this.pickUp)
             .attr({
                 w: Game.components.treasureChest.tile.width,

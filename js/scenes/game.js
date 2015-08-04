@@ -20,7 +20,7 @@ Crafty.defineScene('Game', function() {
         //'demoniac',
         //'druid',
         //'heretic',
-        //'knight',
+        'knight',
         //'necromancer',
         //'overlord',
         //'ranger',
@@ -28,9 +28,11 @@ Crafty.defineScene('Game', function() {
         //'witch'
     ];
 
-    Crafty.e(Crafty.math.randomElementOfArray(availableHeroTypes)).at(2, 2);
+    Crafty.e('hero').at(2, 2).setType(Crafty.math.randomElementOfArray(availableHeroTypes)).stand('right');
 
+    Game.grid.cells = new Array(Game.grid.cols);
     for (var x = 0; x < Game.grid.cols; x++) {
+        Game.grid.cells[x] = new Array(Game.grid.rows);
         for (var y = 0; y < Game.grid.rows; y++) {
             if (x == 0 || x == Game.grid.cols - 1 || y == 0 || y == Game.grid.rows - 1) {
                 Crafty.e('border')
@@ -38,12 +40,14 @@ Crafty.defineScene('Game', function() {
                     // TODO: debug
                     .text(x+', '+y)
                     ;
+                Game.grid.cells[x][y] = 1;
             } else {
                 Crafty.e('grass')
                     .at(x, y)
                     // TODO: debug
                     .text(x+', '+y)
                 ;
+                Game.grid.cells[x][y] = 0;
             }
         }
     }

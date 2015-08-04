@@ -1,19 +1,15 @@
 Crafty.c('hero', {
     init: function() {
-        this._skin = 'hero';
         this.marginLeft = 6;
 
         this.requires('grid')
             .addComponent('SpriteAnimation, Tween, Collision, MoveTo')
-            // TODO: debug
-            //.addComponent('VisibleMBR')
             .addComponent('SolidHitBox')
             .attr({
                 w: Game.components.hero.tile.width,
                 h: Game.components.hero.tile.height,
                 z: Game.components.hero.zIndex
             })
-            .stand('r')
             .initReels()
             .enableKeyboard()
             .initCollision()
@@ -22,11 +18,35 @@ Crafty.c('hero', {
         this.origin('center');
     },
 
+    /**
+     * @param {Number} x
+     * @param {Number} y
+     * @returns {*}
+     */
     at: function(x, y) {
         this.attr({
             x: x * Game.grid.tile.width - this.marginLeft,
             y: y * Game.grid.tile.height - Game.components.hero.tile.height + Game.grid.tile.height
         });
+        return this;
+    },
+
+    /**
+     * @returns {{x: *, y: *}}
+     */
+    getTile: function() {
+        return {
+            x: Math.floor((this.x + this.marginLeft) / Game.grid.tile.width),
+            y: Math.floor((this.y + Game.components.hero.tile.height - Game.grid.tile.height) / Game.grid.tile.height)
+        };
+    },
+
+    /**
+     * @param {String} type
+     * @returns {*}
+     */
+    setType: function(type) {
+        this.type = type;
         return this;
     },
 
@@ -44,16 +64,16 @@ Crafty.c('hero', {
 
             switch (e.key) {
                 case Crafty.keys.LEFT_ARROW:
-                    this.moveIt('l');
+                    this.moveIt('left');
                     break;
                 case Crafty.keys.RIGHT_ARROW:
-                    this.moveIt('r');
+                    this.moveIt('right');
                     break;
                 case Crafty.keys.UP_ARROW:
-                    this.moveIt('t');
+                    this.moveIt('top');
                     break;
                 case Crafty.keys.DOWN_ARROW:
-                    this.moveIt('b');
+                    this.moveIt('bottom');
                     break;
             }
         });
@@ -66,68 +86,70 @@ Crafty.c('hero', {
      * @returns {*}
      */
     initReels: function() {
-        this.reel('walk_r', Game.components.hero.moveDuration, Game.components.hero.animation[Game.components.hero.skinPrefix + 'walk_r'])
-            .reel('walk_l', Game.components.hero.moveDuration, Game.components.hero.animation[Game.components.hero.skinPrefix + 'walk_l'])
-            .reel('walk_b', Game.components.hero.moveDuration, Game.components.hero.animation[Game.components.hero.skinPrefix + 'walk_b'])
-            .reel('walk_t', Game.components.hero.moveDuration, Game.components.hero.animation[Game.components.hero.skinPrefix + 'walk_t']);
+        this.reel('walk_right',  Game.components.hero.moveDuration, Game.components.hero.animation['walk_right'])
+            .reel('walk_left',   Game.components.hero.moveDuration, Game.components.hero.animation['walk_left'])
+            .reel('walk_bottom', Game.components.hero.moveDuration, Game.components.hero.animation['walk_bottom'])
+            .reel('walk_top',    Game.components.hero.moveDuration, Game.components.hero.animation['walk_top']);
 
         return this;
     },
 
     /**
      * Make the character stand
-     * @param o
+     * @param {String} orientation
      * @returns {*}
      */
-    stand: function(o) {
-        if (!o) {
-            o = this._orientation;
-        } else {
-            this._orientation = o;
-        }
+    stand: function(orientation) {
+        this.removeComponent(this.type + '--move--right');
+        this.removeComponent(this.type + '--move--left');
+        this.removeComponent(this.type + '--move--top');
+        this.removeComponent(this.type + '--move--bottom');
 
-        for (var comp in this.__c) if (this.__c.hasOwnProperty(comp)) {
-            if (comp.indexOf(Game.components.hero.skinPrefix) == 0) {
-                this.removeComponent(comp);
-            }
-        }
-
-        this.addComponent(this._skin + '_' + o);
+        this.addComponent(this.type + '--move--' + orientation);
 
         return this;
     },
 
     /**
      * Make the character move
-     * @param o
+     * @param {String} orientation
      * @returns {*}
      */
-    moveIt: function(o) {
-        this.stand(o);
+    moveIt: function(orientation) {
+        this.stand(orientation);
 
-        var tween = {};
+        var t = this,
+            tween = {},
+            newPosition = this.getTile(),
+            movement = Game.components.hero.movement;
 
-        var movement = Game.components.hero.movement;
-
-        switch (o) {
-            case 'r':
+        switch (orientation) {
+            case 'right':
                 tween.x = this.x + movement;
+                newPosition.x += 1;
                 break;
-            case 'l':
+            case 'left':
                 tween.x = this.x - movement;
+                newPosition.x -= 1;
                 break;
-            case 'b':
+            case 'bottom':
                 tween.y = this.y + movement;
+                newPosition.y += 1;
                 break;
-            case 't':
+            case 'top':
                 tween.y = this.y - movement;
+                newPosition.y -= 1;
                 break;
         }
 
-        this.animate('walk_'+ o)
+        // the cell we trying to move on is unbridgeable
+        if (Game.grid.cells[newPosition.x][newPosition.y] === 1) {
+            return;
+        }
+
+        this.animate('walk_'+ orientation)
             .bind('AnimationEnd', function() {
-                this.stand(o)
-                    .unbind('AnimationEnd');
+                t.stand(orientation).unbind('AnimationEnd');
             })
             .tween(tween, Game.components.hero.moveDuration)
         ;
@@ -139,129 +161,17 @@ Crafty.c('hero', {
     initCollision: function() {
         var polygon = new Crafty.polygon(
             // top left
-            [this.marginLeft + 2,                        Game.components.hero.tile.height - Game.grid.tile.height + 1],
-            // bottom left
-            [this.marginLeft + 2,                        Game.components.hero.tile.height - 1],
+            [this.marginLeft + 1,                        Game.components.hero.tile.height - Game.grid.tile.height + 1],
+            // top right
+            [this.marginLeft + Game.grid.tile.width - 1, Game.components.hero.tile.height - Game.grid.tile.height + 1],
             // bottom right
             [this.marginLeft + Game.grid.tile.width - 1, Game.components.hero.tile.height - 1],
-            // top right
-            [this.marginLeft + Game.grid.tile.width - 1, Game.components.hero.tile.height - Game.grid.tile.height + 1]
+            // bottom left
+            [this.marginLeft + 1,                        Game.components.hero.tile.height - 1]
         );
 
-        this.collision(polygon)
-            .onHit('border', this.stopMovement)
-            //.onHit('treasure-chest', this.stopMovement)
-        ;
+        this.collision(polygon);
 
         return this;
-    },
-
-    /**
-     * @param hitData
-     */
-    stopMovement: function(hitData) {
-        console.log('[hit] %O', hitData[0].obj);
-
-        this.cancelTween(this);
-        return;
-
-        console.log('orientation: ', this._orientation);
-        console.log('hero: %O', this);
-
-        var movement = Game.components.hero.movement;
-        var movement = 1;
-
-        switch (this._orientation) {
-            case 'r':
-                this.x -= movement;
-                break;
-            case 'l':
-                this.x += movement;
-                break;
-            case 'b':
-                this.y -= movement;
-                break;
-            case 't':
-                this.y += movement;
-                break;
-        }
-
-        //this._isPlaying = true;
-    }
-});
-
-Crafty.c('alchemist', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('barbarian', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('battle-mage', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('beastmaster', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('cleric', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('death-knight', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('demoniac', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('druid', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('heretic', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('knight', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('necromancer', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('overlord', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('ranger', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('warlock', {
-    init: function() {
-        this.requires('hero');
-    }
-});
-Crafty.c('witch', {
-    init: function() {
-        this.requires('hero');
     }
 });

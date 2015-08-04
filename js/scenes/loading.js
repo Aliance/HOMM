@@ -9,10 +9,15 @@ Crafty.defineScene('Loading', function() {
 
     var assets = {
         'sprites': {
+            './images/heroes/knight.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('knight')
+            },
             './images/heroes/death-knight.png': {
                 tile: Game.components.hero.tile.width,
                 tileh: Game.components.hero.tile.height,
-                map: Game.components.hero.getMap()
+                map: Game.components.hero.getMap('death-knight')
             },
             './images/resources/tiles.png': {
                 tile: Game.components.resource.tile.width,

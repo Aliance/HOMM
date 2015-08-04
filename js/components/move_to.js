@@ -50,6 +50,7 @@ Crafty.c('MoveTo', {
 
         console.log('move to [%d, %d] tile', this._target.x, this._target.y);
         // TODO: A* + animation move
+        this._stopMoving();
         return;
 
         // target (almost) reached - jump the last part.

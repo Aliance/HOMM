@@ -5,7 +5,8 @@ Game = {
         tile: {
             width:  32,
             height: 32
-        }
+        },
+        cells: []
     },
     components: {
         border: {
@@ -77,14 +78,31 @@ Game = {
             movement: 32,
             moveDuration: 500,
             skinPrefix: 'hero_',
+            type: [
+                //'alchemist',
+                //'barbarian',
+                //'battle-mage',
+                //'beastmaster',
+                //'cleric',
+                'death-knight',
+                //'demoniac',
+                //'druid',
+                //'heretic',
+                'knight',
+                //'necromancer',
+                //'overlord',
+                //'ranger',
+                //'warlock',
+                //'witch'
+            ],
             animation: [],
-            getMap: function() {
+            getMap: function(type) {
                 var positions = {};
 
-                positions[Game.components.hero.skinPrefix + 'r'] = [0, 0];
-                positions[Game.components.hero.skinPrefix + 'l'] = [0, 1];
-                positions[Game.components.hero.skinPrefix + 'b'] = [0, 2];
-                positions[Game.components.hero.skinPrefix + 't'] = [0, 3];
+                positions[type + '--move--right']  = [0, 0];
+                positions[type + '--move--left']   = [0, 1];
+                positions[type + '--move--bottom'] = [0, 2];
+                positions[type + '--move--top']    = [0, 3];
 
                 return positions;
             },
@@ -99,11 +117,11 @@ Game = {
                     return map;
                 };
 
-                Game.components.hero.animation[Game.components.hero.skinPrefix + 'walk_r'] = createAnimationMap(0, 7, 0);
+                Game.components.hero.animation['walk_right'] = createAnimationMap(0, 7, 0);
                 // TODO: поменять второй аргумент, когда дорисую спрайты
-                Game.components.hero.animation[Game.components.hero.skinPrefix + 'walk_l'] = createAnimationMap(0, 0, 1);
-                Game.components.hero.animation[Game.components.hero.skinPrefix + 'walk_b'] = createAnimationMap(0, 0, 2);
-                Game.components.hero.animation[Game.components.hero.skinPrefix + 'walk_t'] = createAnimationMap(0, 0, 3);
+                Game.components.hero.animation['walk_left'] = createAnimationMap(0, 0, 1);
+                Game.components.hero.animation['walk_bottom'] = createAnimationMap(0, 0, 2);
+                Game.components.hero.animation['walk_top'] = createAnimationMap(0, 0, 3);
             }
         }
     },
