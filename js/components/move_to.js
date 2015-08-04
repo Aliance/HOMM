@@ -46,9 +46,15 @@ Crafty.c('MoveTo', {
             return;
         }
 
-        this.at(this._target.x, this._target.y);
+        var oldPosition = this.getTile();
 
-        console.log('move to [%d, %d] tile', this._target.x, this._target.y);
+        console.log('moving from [%d, %d] tile to [%d, %d] tile', oldPosition.x, oldPosition.y, this._target.x, this._target.y);
+
+        //this.at(this._target.x, this._target.y);
+
+        var path = Game.finderComponent.findPath(oldPosition.x, oldPosition.y, this._target.x, this._target.y, Game.gridComponent.clone());
+        console.log(path);
+
         // TODO: A* + animation move
         this._stopMoving();
         return;

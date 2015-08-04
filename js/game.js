@@ -1,13 +1,21 @@
-Game = {
+var CONST_WALKABLE = 0;
+var CONST_NOT_WALKABLE = 1;
+
+var Game = {
     grid: {
-        rows: 8,//10,
-        cols: 10,//20,
+        rows: 8, // height / y
+        cols: 10, // width / x
         tile: {
             width:  32,
             height: 32
         },
-        cells: []
+        matrix: []
     },
+    gridComponent: {},
+    finderComponent: new PF.AStarFinder({
+        allowDiagonal: true,
+        dontCrossCorners: true
+    }),
     components: {
         border: {
             tile: {

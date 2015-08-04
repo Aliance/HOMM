@@ -143,7 +143,7 @@ Crafty.c('hero', {
         }
 
         // the cell we trying to move on is unbridgeable
-        if (Game.grid.cells[newPosition.x][newPosition.y] === 1) {
+        if (Game.grid.matrix[newPosition.y][newPosition.x] === CONST_NOT_WALKABLE) {
             return;
         }
 
