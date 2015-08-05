@@ -116,10 +116,13 @@ Crafty.c('hero', {
      * @returns {*}
      */
     moveIt: function(orientation) {
+        Crafty('movement').destroy();
+
         this.stand(orientation);
 
         var t = this,
             tween = {},
+            oldPosition = this.getTile(),
             newPosition = this.getTile(),
             movement = Game.components.hero.movement;
 
@@ -142,10 +145,17 @@ Crafty.c('hero', {
                 break;
         }
 
+        console.log('moving from [%d, %d] tile to [%d, %d] tile', oldPosition.x, oldPosition.y, newPosition.x, newPosition.y);
+
         // the cell we trying to move on is unbridgeable
-        if (Game.grid.matrix[newPosition.y][newPosition.x] === CONST_NOT_WALKABLE) {
+        if (Game.grid.objectMatrix[newPosition.y][newPosition.x] === CONST_NOT_WALKABLE) {
             return;
         }
+
+        Game.grid.matrix[oldPosition.y][oldPosition.x] = CONST_WALKABLE;
+        Game.grid.objectMatrix[oldPosition.y][oldPosition.x] = CONST_WALKABLE;
+        Game.grid.matrix[newPosition.y][newPosition.x] = CONST_NOT_WALKABLE;
+        Game.grid.objectMatrix[newPosition.y][newPosition.x] = CONST_TEMPORARY_NOT_WALKABLE;
 
         this.animate('walk_'+ orientation)
             .bind('AnimationEnd', function() {

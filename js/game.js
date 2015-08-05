@@ -1,20 +1,29 @@
 var CONST_WALKABLE = 0;
 var CONST_NOT_WALKABLE = 1;
+var CONST_TEMPORARY_NOT_WALKABLE = 2;
 
 var Game = {
     grid: {
         rows: 8, // height / y
         cols: 10, // width / x
         tile: {
+            size:  32,
             width:  32,
             height: 32
         },
-        matrix: []
+        /**
+         * Матрица проходимости для pathfinding. 0 - проходимая, 1 - нет.
+         */
+        matrix: [],
+        /**
+         * Матрица размещения объектов. 0 - проходимая, 1 - нет, 2 - временно не проходимая.
+         * Клетка может быть временно непроходимой если там находится объект, с которым может быть взаимодействие.
+         */
+        objectMatrix: []
     },
     gridComponent: {},
     finderComponent: new PF.AStarFinder({
-        allowDiagonal: true,
-        dontCrossCorners: true
+        allowDiagonal: true
     }),
     components: {
         border: {
@@ -30,6 +39,12 @@ var Game = {
                 height: 32
             },
             zIndex: 2
+        },
+        movement: {
+            zIndex: 4,
+            map: {
+                'movement-available': [0, 0]
+            }
         },
         resource: {
             tile: {
@@ -92,7 +107,7 @@ var Game = {
                 //'battle-mage',
                 //'beastmaster',
                 //'cleric',
-                'death-knight',
+                //'death-knight',
                 //'demoniac',
                 //'druid',
                 //'heretic',
@@ -125,11 +140,10 @@ var Game = {
                     return map;
                 };
 
-                Game.components.hero.animation['walk_right'] = createAnimationMap(0, 7, 0);
-                // TODO: поменять второй аргумент, когда дорисую спрайты
-                Game.components.hero.animation['walk_left'] = createAnimationMap(0, 0, 1);
-                Game.components.hero.animation['walk_bottom'] = createAnimationMap(0, 0, 2);
-                Game.components.hero.animation['walk_top'] = createAnimationMap(0, 0, 3);
+                Game.components.hero.animation['walk_right']  = createAnimationMap(0, 7, 0);
+                Game.components.hero.animation['walk_left']   = createAnimationMap(0, 7, 1);
+                Game.components.hero.animation['walk_bottom'] = createAnimationMap(0, 7, 2);
+                Game.components.hero.animation['walk_top']    = createAnimationMap(0, 7, 3);
             }
         }
     },
@@ -148,5 +162,32 @@ var Game = {
         Crafty.init(Game.width(), Game.height(), $container.get(0));
 
         Crafty.enterScene('Loading');
+    },
+
+    locateLandscape: function(entity, x, y) {
+        Game.grid.matrix[y][x] = CONST_NOT_WALKABLE;
+        Game.grid.objectMatrix[y][x] = CONST_NOT_WALKABLE;
+
+        return this.locateEntity(entity, x, y);
+    },
+
+    locateItem: function(entity, x, y) {
+        Game.grid.matrix[y][x] = CONST_NOT_WALKABLE;
+        Game.grid.objectMatrix[y][x] = CONST_TEMPORARY_NOT_WALKABLE;
+
+        return this.locateEntity(entity, x, y);
+    },
+
+    locateTerrain: function(entity, x, y) {
+        Game.grid.matrix[y][x] = CONST_WALKABLE;
+        Game.grid.objectMatrix[y][x] = CONST_WALKABLE;
+
+        return this.locateEntity(entity, x, y);
+    },
+
+    locateEntity: function(entity, x, y) {
+        console.log('%s - %s, %s', entity, x, y);
+
+        return Crafty.e(entity).at(x, y);
     }
 };

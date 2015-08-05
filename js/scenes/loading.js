@@ -9,7 +9,8 @@ Crafty.defineScene('Loading', function() {
 
     var assets = {
         'images': [
-            './images/border2.png'
+            './images/grass.png',
+            './images/border.png'
         ],
         'sprites': {
             './images/heroes/knight.png': {
@@ -26,6 +27,11 @@ Crafty.defineScene('Loading', function() {
                 tile: Game.components.resource.tile.width,
                 tileh: Game.components.resource.tile.height,
                 map: Game.components.resource.getMap()
+            },
+            './images/movement.png': {
+                tile: Game.grid.size,
+                tileh: Game.grid.size,
+                map: Game.components.movement.map
             }
         }
     };
