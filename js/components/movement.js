@@ -1,7 +1,7 @@
 Crafty.c('movement', {
     init: function() {
         this.requires('grid')
-            .addComponent('movement-available')
+            //.addComponent('movement-available')
             //.addComponent('VisibleMBR') // DEBUG
             .attr({
                 w: Game.grid.tile.size,
