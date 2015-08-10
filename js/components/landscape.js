@@ -37,9 +37,12 @@ Crafty.c('landscape', {
         return this;
     },
 
-    placeRandomTerrain: function(prefix, from, to, angle) {
+    placeRandomTerrain: function(prefix, from, to, angle, flip) {
         this.addComponent(prefix + '-' + Crafty.math.randomInt(from, to));
         this.rotation = angle;
+        if (flip) {
+            this.flip(flip);
+        }
         return this;
     }
 });

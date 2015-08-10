@@ -72,7 +72,7 @@ Crafty.defineScene('Loading', function() {
             './images/resources/tiles.png': {
                 tile: Game.grid.tile.size,
                 tileh: Game.grid.tile.size,
-                map: Game.components.resource.getMap()
+                map: Game.components.resource.map
             },
             './images/heroes/knight.png': {
                 tile: Game.components.hero.tile.width,
@@ -88,6 +88,21 @@ Crafty.defineScene('Loading', function() {
                 tile: Game.grid.tile.size,
                 tileh: Game.grid.tile.size,
                 map: Game.components.movement.map
+            },
+            './images/towns/castle.png': {
+                tile: Game.components.town.tile.width,
+                tileh: Game.components.town.tile.height,
+                map: Game.components.town.map
+            },
+            './images/creatures/lazure.png': {
+                tile: Game.components.creatures.tile.width,
+                tileh: Game.components.creatures.tile.height,
+                map: Game.components.creatures.map
+            },
+            './images/objects/terrain/AVLctrg0.png': {
+                tile: Game.components.object.tile.width,
+                tileh: Game.components.object.tile.height,
+                map: Game.components.object.map
             }
         }
     };
@@ -97,6 +112,7 @@ Crafty.defineScene('Loading', function() {
         function() {
             Game.components.hero.createAnimation();
             Game.components.resource.createAnimation();
+            Game.components.creatures.createAnimation();
 
             Crafty.enterScene('Game');
         },

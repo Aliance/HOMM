@@ -4,7 +4,7 @@ Crafty.c('hero', {
 
         this.requires('grid')
             .addComponent('SpriteAnimation, Tween, Collision, MoveTo')
-            .addComponent('SolidHitBox') // DEBUG
+            //.addComponent('SolidHitBox') // DEBUG
             //.addComponent('VisibleMBR') // DEBUG
             .attr({
                 w: Game.components.hero.tile.width,

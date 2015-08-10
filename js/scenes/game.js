@@ -7,7 +7,7 @@ Crafty.defineScene('Game', function() {
         Game.grid.objectMatrix[y] = new Array(Game.grid.cols);
 
         for (var x = 0; x < Game.grid.cols; x++) {
-            var terrain, from, to, angle = 0;
+            var terrain, from, to, angle = 0, flip = null;
             switch (mapData.landscape.terrain[y][x]) {
                 // 1 - 24
                 case CONST_LANDSCAPE_TILE_GRASS:
@@ -29,13 +29,13 @@ Crafty.defineScene('Game', function() {
                             angle = 0;
                             break;
                         case CONST_LANDSCAPE_TILE_GRASS_COAST_CORNER_NE:
-                            angle = 90;
+                            flip = 'X';
                             break;
                         case CONST_LANDSCAPE_TILE_GRASS_COAST_CORNER_SE:
                             angle = 180;
                             break;
                         case CONST_LANDSCAPE_TILE_GRASS_COAST_CORNER_SW:
-                            angle = 270;
+                            flip = 'Y';
                             break;
                     }
                     break;
@@ -83,13 +83,13 @@ Crafty.defineScene('Game', function() {
                             angle = 0;
                             break;
                         case CONST_LANDSCAPE_TILE_WATER_CORNER_SMALL_NE:
-                            angle = 90;
+                            flip = 'X';
                             break;
                         case CONST_LANDSCAPE_TILE_WATER_CORNER_SMALL_SE:
                             angle = 180;
                             break;
                         case CONST_LANDSCAPE_TILE_WATER_CORNER_SMALL_SW:
-                            angle = 270;
+                            flip = 'Y';
                             break;
                     }
                     break;
@@ -117,11 +117,11 @@ Crafty.defineScene('Game', function() {
                     Crafty.enterScene('Error');
                     throw new Error('map landscape error');
             }
-            Game.locateLandscape('landscape', x, y, angle).placeRandomTerrain(terrain, from, to, angle);
+            Game.locateLandscape('landscape', x, y, angle).placeRandomTerrain(terrain, from, to, angle, flip);
         }
     }
 
-    Game.locateItem('hero', 4, 2).setType(Crafty.math.randomElementOfArray(Game.components.hero.type).toString()).stand('right');
+    Game.locateItem('hero', 12, 5).setType(Crafty.math.randomElementOfArray(Game.components.hero.type).toString()).stand('right');
     Game.locateItem('treasure-chest', 6, 2);
     Game.locateItem('gold', 8, 2);
 
@@ -132,4 +132,10 @@ Crafty.defineScene('Game', function() {
     Game.locateItem('mercury', 4, 6);
     Game.locateItem('wood', 6, 6);
     Game.locateItem('ore', 8, 6);
+
+    Game.locateTown('castle', 12, 4);
+
+    Game.locateObject('obj1', 15, 6);
+
+    Game.locateCreature('lazure', 6, 8);
 });

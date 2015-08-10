@@ -14,7 +14,13 @@ var createComponentMap = function(prefix, to) {
 
 var Game = {
     grid: {
-        rows: 10, // height / y
+        /**
+         *  S: 36*36
+         *  M: 72*72
+         *  L: 108*108
+         * XL: 144*144
+         */
+        rows: 14, // height / y
         cols: 20, // width / x
         tile: {
             size:  32,
@@ -74,19 +80,15 @@ var Game = {
         resource: {
             animation: [],
             animationDuration: 1500,
-            getMap: function() {
-                var positions = {};
-
-                positions['shining--gold']           = [0, 0];
-                positions['shining--treasure-chest'] = [0, 1];
-                positions['shining--sulphur']        = [0, 2];
-                positions['shining--mercury']        = [1, 2];
-                positions['shining--wood']           = [2, 2];
-                positions['shining--ore']            = [3, 2];
-                positions['shining--gem']            = [0, 3];
-                positions['shining--crystal']        = [0, 4];
-
-                return positions;
+            map: {
+                'shining--gold'          : [0, 0],
+                'shining--treasure-chest': [0, 1],
+                'shining--sulphur'       : [0, 2],
+                'shining--mercury'       : [1, 2],
+                'shining--wood'          : [2, 2],
+                'shining--ore'           : [3, 2],
+                'shining--gem'           : [0, 3],
+                'shining--crystal'       : [0, 4]
             },
             createAnimation: function() {
                 var createAnimationMap = function(from, to, y) {
@@ -104,8 +106,6 @@ var Game = {
                 Game.components.resource.animation['gem']            = createAnimationMap(0, 7, 3);
                 Game.components.resource.animation['crystal']        = createAnimationMap(0, 7, 4);
             }
-        },
-        treasureChest: {
         },
         hero: {
             tile: {
@@ -159,6 +159,52 @@ var Game = {
                 Game.components.hero.animation['walk_bottom'] = createAnimationMap(0, 7, 2);
                 Game.components.hero.animation['walk_top']    = createAnimationMap(0, 7, 3);
             }
+        },
+        town: {
+            tile: {
+                width:  160,
+                height: 142
+            },
+            map: {
+                'castle': [0, 0]
+            }
+        },
+        creatures: {
+            tile: {
+                width:  40,
+                height: 50
+            },
+            map: {
+                'lazure': [0, 0]
+            },
+            animationDuration: 1500,
+            animation: [],
+            createAnimation: function() {
+                var createAnimationMap = function(from, to, y) {
+                    var map = [];
+
+                    for (var i = from; i < to; i++) {
+                        map.push([i, y]);
+                    }
+
+                    for (var i = to; i <= from; i++) {
+                        map.push([i, y]);
+                    }
+
+                    return map;
+                };
+
+                Game.components.creatures.animation['motion--lazure']  = createAnimationMap(0, 5, 0);
+            }
+        },
+        object: {
+            tile: {
+                width:  64,
+                height: 32
+            },
+            map: {
+                'obj1': [0, 0]
+            }
         }
     },
 
@@ -176,6 +222,42 @@ var Game = {
         Crafty.init(Game.width(), Game.height(), $container.get(0));
 
         Crafty.enterScene('Loading');
+    },
+
+    locateCreature: function(entityType, x, y) {
+        for (var _x = x - 1; _x <= x + 1; _x++) {
+            for (var _y = y - 1; _y <= y + 1; _y++) {
+                Game.markTileTemporaryUnwalkable(_x, y);
+                console.log('%d, %d => %d, %d', x, y, _x, _y);
+            }
+        }
+
+        var entity = this.locateEntity('creature', x, y).addComponent(entityType);
+
+        entity.addComponent('SpriteAnimation')
+              .reel('motion', Game.components.creatures.animationDuration, Game.components.creatures.animation['motion--' + entityType])
+              .animate('motion', -1);
+
+        return entity;
+    },
+
+    locateTown: function(entity, x, y) {
+        for (var _x = x - 2; _x <= x + 2; _x++) {
+            if (_x !== x) {
+                Game.markTileUnwalkable(_x, y);
+            }
+            Game.markTileUnwalkable(_x, y - 1);
+            Game.markTileUnwalkable(_x, y - 2);
+        }
+
+        return this.locateEntity('town', x, y).addComponent(entity);
+    },
+
+    locateObject: function(entity, x, y) {
+        Game.markTileUnwalkable(x, y);
+        Game.markTileUnwalkable(x + 1, y);
+
+        return this.locateEntity('object', x, y).addComponent(entity);
     },
 
     locateItem: function(entity, x, y) {
@@ -209,5 +291,15 @@ var Game = {
         }
 
         return Crafty.e(entity).at(x, y);
+    },
+
+    markTileUnwalkable: function(x, y) {
+        Game.grid.matrix[y][x] = CONST_NOT_WALKABLE;
+        Game.grid.objectMatrix[y][x] = CONST_NOT_WALKABLE;
+    },
+
+    markTileTemporaryUnwalkable: function(x, y) {
+        Game.grid.matrix[y][x] = CONST_NOT_WALKABLE;
+        Game.grid.objectMatrix[y][x] = CONST_TEMPORARY_NOT_WALKABLE;
     }
 };

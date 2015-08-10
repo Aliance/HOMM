@@ -1,12 +1,10 @@
-Crafty.c('resource', {
+Crafty.c('object', {
     init: function() {
         this.requires('grid')
-            .addComponent('Collision')
             //.addComponent('SolidHitBox') // DEBUG
-            .onHit('hero', this.destroy)
             .attr({
-                w: Game.grid.tile.size,
-                h: Game.grid.tile.size,
+                w: Game.components.object.tile.width,
+                h: Game.components.object.tile.height,
                 z: 2
             })
     },

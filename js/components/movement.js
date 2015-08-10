@@ -6,7 +6,7 @@ Crafty.c('movement', {
             .attr({
                 w: Game.grid.tile.size,
                 h: Game.grid.tile.size,
-                z: 3
+                z: 30
             })
     },
 
