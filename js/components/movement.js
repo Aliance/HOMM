@@ -2,11 +2,11 @@ Crafty.c('movement', {
     init: function() {
         this.requires('grid')
             .addComponent('movement-available')
-            //.addComponent('VisibleMBR')
+            //.addComponent('VisibleMBR') // DEBUG
             .attr({
                 w: Game.grid.tile.size,
                 h: Game.grid.tile.size,
-                z: Game.components.movement.zIndex
+                z: 3
             })
     },
 

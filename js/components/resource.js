@@ -2,12 +2,12 @@ Crafty.c('resource', {
     init: function() {
         this.requires('grid')
             .addComponent('Collision')
-            .addComponent('SolidHitBox')
+            .addComponent('SolidHitBox') // DEBUG
             .onHit('hero', this.destroy)
             .attr({
-                w: Game.components.resource.tile.width,
-                h: Game.components.resource.tile.height,
-                z: Game.components.resource.zIndex
+                w: Game.grid.tile.size,
+                h: Game.grid.tile.size,
+                z: 2
             })
     },
 
@@ -18,8 +18,8 @@ Crafty.c('resource', {
      */
     at: function(x, y) {
         this.attr({
-            x: x * Game.grid.tile.width,
-            y: y * Game.grid.tile.height
+            x: x * Game.grid.tile.size,
+            y: y * Game.grid.tile.size
         });
         return this;
     }

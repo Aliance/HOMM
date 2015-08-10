@@ -2,10 +2,20 @@ var CONST_WALKABLE = 0;
 var CONST_NOT_WALKABLE = 1;
 var CONST_TEMPORARY_NOT_WALKABLE = 2;
 
+var createComponentMap = function(prefix, to) {
+    var map = {};
+
+    for (var i = 1; i <= to; i++) {
+        map[prefix + '-' + i] = [i - 1, 0];
+    }
+
+    return map;
+};
+
 var Game = {
     grid: {
-        rows: 8, // height / y
-        cols: 10, // width / x
+        rows: 10, // height / y
+        cols: 20, // width / x
         tile: {
             size:  32,
             width:  32,
@@ -26,32 +36,42 @@ var Game = {
         allowDiagonal: true
     }),
     components: {
-        border: {
-            tile: {
-                width:  32,
-                height: 32
-            },
-            zIndex: 1
+        dirt: {
+            map: createComponentMap('dirt', 46)
         },
         grass: {
-            tile: {
-                width:  32,
-                height: 32
-            },
-            zIndex: 2
+            map: createComponentMap('grass', 79)
+        },
+        lava: {
+            map: createComponentMap('lava', 79)
+        },
+        rock: {
+            map: createComponentMap('rock', 48)
+        },
+        rough: {
+            map: createComponentMap('rough', 79)
+        },
+        sand: {
+            map: createComponentMap('sand', 24)
+        },
+        snow: {
+            map: createComponentMap('snow', 79)
+        },
+        subbtl: {
+            map: createComponentMap('subbtl', 79)
+        },
+        swamp: {
+            map: createComponentMap('swamp', 79)
+        },
+        water: {
+            map: createComponentMap('water', 33)
         },
         movement: {
-            zIndex: 4,
             map: {
                 'movement-available': [0, 0]
             }
         },
         resource: {
-            tile: {
-                width:  32,
-                height: 32
-            },
-            zIndex: 3,
             animation: [],
             animationDuration: 1500,
             getMap: function() {
@@ -86,18 +106,12 @@ var Game = {
             }
         },
         treasureChest: {
-            tile: {
-                width:  32,
-                height: 32
-            },
-            zIndex: 3
         },
         hero: {
             tile: {
                 width:  50,
                 height: 59
             },
-            zIndex: 100,
             movement: 32,
             moveDuration: 500,
             skinPrefix: 'hero_',
@@ -164,13 +178,6 @@ var Game = {
         Crafty.enterScene('Loading');
     },
 
-    locateLandscape: function(entity, x, y) {
-        Game.grid.matrix[y][x] = CONST_NOT_WALKABLE;
-        Game.grid.objectMatrix[y][x] = CONST_NOT_WALKABLE;
-
-        return this.locateEntity(entity, x, y);
-    },
-
     locateItem: function(entity, x, y) {
         Game.grid.matrix[y][x] = CONST_NOT_WALKABLE;
         Game.grid.objectMatrix[y][x] = CONST_TEMPORARY_NOT_WALKABLE;
@@ -178,15 +185,28 @@ var Game = {
         return this.locateEntity(entity, x, y);
     },
 
-    locateTerrain: function(entity, x, y) {
+    locateLandscape: function(entity, x, y, angle) {
         Game.grid.matrix[y][x] = CONST_WALKABLE;
         Game.grid.objectMatrix[y][x] = CONST_WALKABLE;
 
-        return this.locateEntity(entity, x, y);
+        return this.locateEntity(entity, x, y, angle);
     },
 
-    locateEntity: function(entity, x, y) {
+    locateEntity: function(entity, x, y, angle) {
         console.log('%s - %s, %s', entity, x, y);
+
+        switch (angle) {
+            case 90:
+                x += 1;
+                break;
+            case 180:
+                x += 1;
+                y += 1;
+                break;
+            case 270:
+                y += 1;
+                break;
+        }
 
         return Crafty.e(entity).at(x, y);
     }

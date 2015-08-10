@@ -1,8 +1,7 @@
 Crafty.c('grid', {
     init: function(){
-        // TODO: раскомментировать канвас для прода
         //this.requires('2D, Canvas');
-        this.requires('2D, DOM');
+        this.requires('2D, DOM'); // DEBUG
     },
 
     getPosition: function() {

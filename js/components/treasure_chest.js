@@ -11,12 +11,12 @@ Crafty.c('treasure-chest', {
             .reel('shining', Game.components.resource.animationDuration, Game.components.resource.animation['treasure-chest'])
             .animate('shining', -1)
             .addComponent('Collision')
-            .addComponent('SolidHitBox')
+            .addComponent('SolidHitBox') // DEBUG
             .onHit('hero', this.pickUp)
             .attr({
-                w: Game.components.treasureChest.tile.width,
-                h: Game.components.treasureChest.tile.height,
-                z: Game.components.treasureChest.zIndex
+                w: Game.grid.tile.size,
+                h: Game.grid.tile.size,
+                z: 2
             })
     },
 

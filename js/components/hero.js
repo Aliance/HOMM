@@ -4,11 +4,12 @@ Crafty.c('hero', {
 
         this.requires('grid')
             .addComponent('SpriteAnimation, Tween, Collision, MoveTo')
-            .addComponent('SolidHitBox')
+            .addComponent('SolidHitBox') // DEBUG
+            //.addComponent('VisibleMBR') // DEBUG
             .attr({
                 w: Game.components.hero.tile.width,
                 h: Game.components.hero.tile.height,
-                z: Game.components.hero.zIndex
+                z: 4
             })
             .initReels()
             .enableKeyboard()
@@ -143,6 +144,11 @@ Crafty.c('hero', {
                 tween.y = this.y - movement;
                 newPosition.y -= 1;
                 break;
+        }
+
+        // prevent from moving of the edge of the map
+        if (newPosition.x < 0 || newPosition.x >= Game.grid.cols || newPosition.y < 0 || newPosition.y >= Game.grid.rows) {
+            return;
         }
 
         console.log('moving from [%d, %d] tile to [%d, %d] tile', oldPosition.x, oldPosition.y, newPosition.x, newPosition.y);
