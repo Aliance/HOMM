@@ -89,7 +89,7 @@ Crafty.defineScene('Loading', function() {
                 tileh: Game.grid.tile.size,
                 map: Game.components.movement.map
             },
-            './images/towns/castle.png': {
+            './images/towns/tiles.png': {
                 tile: Game.components.town.tile.width,
                 tileh: Game.components.town.tile.height,
                 map: Game.components.town.map

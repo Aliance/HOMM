@@ -83,6 +83,7 @@ var Game = {
                 'movement--available--left--bottom-left'      : [6 , 0],
                 'movement--available--top-left--left'         : [7 , 0],
                 'movement--available--top--top-left'          : [8 , 0],
+                'movement--available--top-right--top-left'    : [1 , 0], // hack
                 'movement--available--top'                    : [9 , 0],
                 'movement--available--top-right'              : [10, 0],
                 'movement--available--right'                  : [11, 0],
@@ -196,11 +197,36 @@ var Game = {
         },
         town: {
             tile: {
-                width:  160,
-                height: 142
+                width:  192,
+                height: 192
             },
+            type: [
+                'castle',
+                'rampart',
+                'tower',
+                'inferno',
+                'necropolis',
+                'dungeon',
+                'stronghold',
+                'fortress'
+            ],
             map: {
-                'castle': [0, 0]
+                'castle'    : [0, 0],
+                'rampart'   : [1, 0],
+                'tower'     : [2, 0],
+                'inferno'   : [3, 0],
+                'necropolis': [4, 0],
+                'dungeon'   : [5, 0],
+                'stronghold': [6, 0],
+                'fortress'  : [7, 0],
+                'castle-village'    : [0, 1],
+                'rampart-village'   : [1, 1],
+                'tower-village'     : [2, 1],
+                'inferno-village'   : [3, 1],
+                'necropolis-village': [4, 1],
+                'dungeon-village'   : [5, 1],
+                'stronghold-village': [6, 1],
+                'fortress-village'  : [7, 1]
             }
         },
         creatures: {
@@ -262,7 +288,6 @@ var Game = {
         for (var _x = x - 1; _x <= x + 1; _x++) {
             for (var _y = y - 1; _y <= y + 1; _y++) {
                 Game.markTileTemporaryUnwalkable(_x, y);
-                console.log('%d, %d => %d, %d', x, y, _x, _y);
             }
         }
 
@@ -291,12 +316,16 @@ var Game = {
         Game.markTileUnwalkable(x+1, y);
         Game.markTileUnwalkable(x+2, y);
 
+        console.log('town: %s', entity);
+
         return this.locateEntity('town', x, y).addComponent(entity);
     },
 
     locateObject: function(entity, x, y) {
         Game.markTileUnwalkable(x, y);
         Game.markTileUnwalkable(x + 1, y);
+
+        console.log('object: %s', entity);
 
         return this.locateEntity('object', x, y).addComponent(entity);
     },

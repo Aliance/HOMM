@@ -134,9 +134,9 @@ Crafty.defineScene('Game', function() {
     Game.locateItem('wood', 6, 6);
     Game.locateItem('ore', 8, 6);
 
-    Game.locateTown('castle', 12, 7);
+    Game.locateTown(Crafty.math.randomElementOfArray(Game.components.town.type).toString(), 12, 7);
 
-    Game.locateObject('obj1', 15, 6);
+    Game.locateObject('obj1', 15, 10);
 
     Game.locateCreature('lazure', 6, 8);
 });
