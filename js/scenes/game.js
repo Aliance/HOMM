@@ -117,11 +117,12 @@ Crafty.defineScene('Game', function() {
                     Crafty.enterScene('Error');
                     throw new Error('map landscape error');
             }
+            // TODO: water => unwalkable
             Game.locateLandscape('landscape', x, y, angle).placeRandomTerrain(terrain, from, to, angle, flip);
         }
     }
 
-    Game.locateItem('hero', 12, 5).setType(Crafty.math.randomElementOfArray(Game.components.hero.type).toString()).stand('right');
+    Game.locateItem('hero', 12, 8).setType(Crafty.math.randomElementOfArray(Game.components.hero.type).toString()).stand('right');
     Game.locateItem('treasure-chest', 6, 2);
     Game.locateItem('gold', 8, 2);
 
@@ -133,7 +134,7 @@ Crafty.defineScene('Game', function() {
     Game.locateItem('wood', 6, 6);
     Game.locateItem('ore', 8, 6);
 
-    Game.locateTown('castle', 12, 4);
+    Game.locateTown('castle', 12, 7);
 
     Game.locateObject('obj1', 15, 6);
 
