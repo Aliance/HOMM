@@ -123,20 +123,19 @@ Crafty.defineScene('Game', function() {
     }
 
     Game.locateItem('hero', 12, 8).setType(Crafty.math.randomElementOfArray(Game.components.hero.type).toString()).stand('right');
-    Game.locateItem('treasure-chest', 6, 2);
-    Game.locateItem('gold', 8, 2);
 
-    Game.locateItem('gem', 4, 4);
-    Game.locateItem('crystal', 6, 4);
-    Game.locateItem('sulphur', 8, 4);
-
-    Game.locateItem('mercury', 4, 6);
-    Game.locateItem('wood', 6, 6);
-    Game.locateItem('ore', 8, 6);
+    Game.locateItem('treasure-chest', 9, 10);
+    Game.locateItem('gem', 10, 10);
+    Game.locateItem('gold', 10, 11);
+    Game.locateItem('crystal', 11, 11);
+    Game.locateItem('mercury', 3, 3);
+    Game.locateItem('wood', 4, 4);
+    Game.locateItem('ore', 5, 5);
+    Game.locateItem('sulphur', 6, 6);
 
     Game.locateTown(Crafty.math.randomElementOfArray(Game.components.town.type).toString(), 12, 7);
 
-    Game.locateObject('obj1', 15, 10);
+    Game.locateObject('obj1', 15, 7);
 
     Game.locateCreature('lazure', 6, 8);
 });

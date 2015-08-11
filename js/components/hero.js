@@ -26,8 +26,8 @@ Crafty.c('hero', {
      */
     at: function(x, y) {
         this.attr({
-            x: x * Game.grid.tile.width - this.marginLeft,
-            y: y * Game.grid.tile.height - Game.components.hero.tile.height + Game.grid.tile.height
+            x: x * Game.grid.tileSize - this.marginLeft,
+            y: y * Game.grid.tileSize - Game.components.hero.tile.height + Game.grid.tileSize
         });
         return this;
     },
@@ -37,8 +37,8 @@ Crafty.c('hero', {
      */
     getTile: function() {
         return {
-            x: Math.floor((this.x + this.marginLeft) / Game.grid.tile.width),
-            y: Math.floor((this.y + Game.components.hero.tile.height - Game.grid.tile.height) / Game.grid.tile.height)
+            x: Math.floor((this.x + this.marginLeft) / Game.grid.tileSize),
+            y: Math.floor((this.y + Game.components.hero.tile.height - Game.grid.tileSize) / Game.grid.tileSize)
         };
     },
 
@@ -177,13 +177,13 @@ Crafty.c('hero', {
     initCollision: function() {
         var polygon = new Crafty.polygon(
             // top left
-            [this.marginLeft + 1,                        Game.components.hero.tile.height - Game.grid.tile.height + 1],
+            [this.marginLeft + 1,                      Game.components.hero.tile.height - Game.grid.tileSize + 1],
             // top right
-            [this.marginLeft + Game.grid.tile.width - 1, Game.components.hero.tile.height - Game.grid.tile.height + 1],
+            [this.marginLeft + Game.grid.tileSize - 1, Game.components.hero.tile.height - Game.grid.tileSize + 1],
             // bottom right
-            [this.marginLeft + Game.grid.tile.width - 1, Game.components.hero.tile.height - 1],
+            [this.marginLeft + Game.grid.tileSize - 1, Game.components.hero.tile.height - 1],
             // bottom left
-            [this.marginLeft + 1,                        Game.components.hero.tile.height - 1]
+            [this.marginLeft + 1,                      Game.components.hero.tile.height - 1]
         );
 
         this.collision(polygon);

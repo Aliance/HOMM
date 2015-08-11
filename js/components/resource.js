@@ -5,8 +5,8 @@ Crafty.c('resource', {
             //.addComponent('SolidHitBox') // DEBUG
             .onHit('hero', this.destroy)
             .attr({
-                w: Game.grid.tile.size,
-                h: Game.grid.tile.size,
+                w: Game.grid.tileSize,
+                h: Game.grid.tileSize,
                 z: 2
             })
     },
@@ -18,8 +18,8 @@ Crafty.c('resource', {
      */
     at: function(x, y) {
         this.attr({
-            x: x * Game.grid.tile.size,
-            y: y * Game.grid.tile.size
+            x: x * Game.grid.tileSize,
+            y: y * Game.grid.tileSize
         });
         return this;
     }

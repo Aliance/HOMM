@@ -16,8 +16,8 @@ Crafty.c('object', {
      */
     at: function(x, y) {
         this.attr({
-            x: x * Game.grid.tile.size,
-            y: y * Game.grid.tile.size
+            x: x * Game.grid.tileSize,
+            y: y * Game.grid.tileSize
         });
         return this;
     }

@@ -27,8 +27,8 @@ Crafty.c('MoveTo', {
         }
 
         this.to = {
-            x: Math.floor(e.realX / Game.grid.tile.size),
-            y: Math.floor(e.realY / Game.grid.tile.size)
+            x: Math.floor(e.realX / Game.grid.tileSize),
+            y: Math.floor(e.realY / Game.grid.tileSize)
         };
 
         if (Game.grid.objectMatrix[this.to.y][this.to.x] === CONST_NOT_WALKABLE) {

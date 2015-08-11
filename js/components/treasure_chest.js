@@ -14,16 +14,16 @@ Crafty.c('treasure-chest', {
             //.addComponent('SolidHitBox') // DEBUG
             .onHit('hero', this.pickUp)
             .attr({
-                w: Game.grid.tile.size,
-                h: Game.grid.tile.size,
+                w: Game.grid.tileSize,
+                h: Game.grid.tileSize,
                 z: 2
             })
     },
 
     at: function(x, y) {
         this.attr({
-            x: x * Game.grid.tile.width,
-            y: y * Game.grid.tile.height
+            x: x * Game.grid.tileSize,
+            y: y * Game.grid.tileSize
         });
         return this;
     },

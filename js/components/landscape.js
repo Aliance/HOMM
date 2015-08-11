@@ -22,8 +22,8 @@ Crafty.c('landscape', {
     init: function() {
         this.requires('grid')
             .attr({
-                w: Game.grid.tile.size,
-                h: Game.grid.tile.size,
+                w: Game.grid.tileSize,
+                h: Game.grid.tileSize,
                 z: 1
             })
         ;
@@ -31,8 +31,8 @@ Crafty.c('landscape', {
 
     at: function(x, y) {
         this.attr({
-            x: x * Game.grid.tile.size,
-            y: y * Game.grid.tile.size
+            x: x * Game.grid.tileSize,
+            y: y * Game.grid.tileSize
         });
         return this;
     },

@@ -5,6 +5,6 @@ Crafty.c('grid', {
     },
 
     getPosition: function() {
-        return {x: this.x / Game.grid.tile.width, y: this.y / Game.grid.tile.height};
+        return {x: this.x / Game.grid.tileSize, y: this.y / Game.grid.tileSize};
     }
 });

@@ -22,11 +22,7 @@ var Game = {
          */
         rows: 14, // height / y
         cols: 20, // width / x
-        tile: {
-            size:  32,
-            width:  32,
-            height: 32
-        },
+        tileSize:  32,
         /**
          * Матрица проходимости для pathfinding. 0 - проходимая, 1 - нет.
          */
@@ -37,7 +33,6 @@ var Game = {
          */
         objectMatrix: []
     },
-    gridComponent: {},
     finderComponent: new PF.AStarFinder({
         allowDiagonal: true
     }),
@@ -74,42 +69,52 @@ var Game = {
         },
         movement: {
             map: {
-                'movement--available--target'                 : [0 , 0],
-                'movement--available--top-right--top'         : [1 , 0],
-                'movement--available--right--top-right'       : [2 , 0],
-                'movement--available--bottom-right--right'    : [3 , 0],
-                'movement--available--bottom--bottom-right'   : [4 , 0],
-                'movement--available--bottom-left--bottom'    : [5 , 0],
-                'movement--available--left--bottom-left'      : [6 , 0],
-                'movement--available--top-left--left'         : [7 , 0],
-                'movement--available--top--top-left'          : [8 , 0],
-                'movement--available--top-right--top-left'    : [1 , 0], // hack
-                'movement--available--top'                    : [9 , 0],
-                'movement--available--top-right'              : [10, 0],
-                'movement--available--right'                  : [11, 0],
-                'movement--available--bottom-right'           : [12, 0],
-                'movement--available--bottom'                 : [13, 0],
-                'movement--available--bottom-left'            : [14, 0],
-                'movement--available--left'                   : [15, 0],
-                'movement--available--top-left'               : [16, 0],
-                'movement--available--top-left--top'          : [17, 0],
-                'movement--available--top--top-right'         : [18, 0],
-                'movement--available--top-right--right'       : [19, 0],
-                'movement--available--right--bottom-right'    : [20, 0],
-                'movement--available--bottom-right--bottom'   : [21, 0],
-                'movement--available--bottom--bottom-left'    : [22, 0],
-                'movement--available--bottom-left--left'      : [23, 0],
-                'movement--available--left--top-left'         : [24, 0],
-                'movement--unavailable--target'               : [25, 0],
-                'movement--unavailable--top-right--top'       : [26, 0],
-                'movement--unavailable--right--top-right'     : [27, 0],
-                'movement--unavailable--bottom-right--right'  : [28, 0],
-                'movement--unavailable--bottom--bottom-right' : [29, 0],
-                'movement--unavailable--bottom-left--bottom'  : [30, 0],
-                'movement--unavailable--left--bottom-left'    : [31, 0],
-                'movement--unavailable--top-left--left'       : [32, 0],
-                'movement--unavailable--top--top-left'        : [33, 0],
-                'movement--unavailable--top'                  : [34, 0]
+                'movement--available--target'                      : [0 , 0],
+                'movement--available--top-right--top'              : [1 , 0],
+                'movement--available--right--top-right'            : [2 , 0],
+                'movement--available--bottom-right--top-right'     : [2 , 0], // hack
+                'movement--available--bottom-right--right'         : [3 , 0],
+                'movement--available--bottom--bottom-right'        : [4 , 0],
+                'movement--available--bottom-left--bottom-right'   : [4 , 0], // hack
+                'movement--available--bottom-left--bottom'         : [5 , 0],
+                'movement--available--left--bottom-left'           : [6 , 0],
+                'movement--available--top-left--bottom-left'       : [6 , 0], // hack
+                'movement--available--top-left--left'              : [7 , 0],
+                'movement--available--top--top-left'               : [8 , 0],
+                'movement--available--top-right--top-left'         : [8 , 0], // hack
+                'movement--available--top'                         : [9 , 0],
+                'movement--available--top-right'                   : [10, 0],
+                'movement--available--right'                       : [11, 0],
+                'movement--available--bottom-right'                : [12, 0],
+                'movement--available--bottom'                      : [13, 0],
+                'movement--available--bottom-left'                 : [14, 0],
+                'movement--available--left'                        : [15, 0],
+                'movement--available--top-left'                    : [16, 0],
+                'movement--available--top-left--top'               : [17, 0],
+                'movement--available--top--top-right'              : [18, 0],
+                'movement--available--top-left--top-right'         : [18, 0], // hack
+                'movement--available--top-right--right'            : [19, 0],
+                'movement--available--right--bottom-right'         : [20, 0],
+                'movement--available--top-right--bottom-right'     : [20, 0], // hack
+                'movement--available--bottom-right--bottom'        : [21, 0],
+                'movement--available--bottom--bottom-left'         : [22, 0],
+                'movement--available--bottom-right--bottom-left'   : [22, 0], // hack
+                'movement--available--bottom-left--left'           : [23, 0],
+                'movement--available--left--top-left'              : [24, 0],
+                'movement--available--bottom-left--top-left'       : [24, 0], // hack
+                'movement--unavailable--target'                    : [25, 0],
+                'movement--unavailable--top-right--top'            : [26, 0],
+                'movement--unavailable--right--top-right'          : [27, 0],
+                'movement--unavailable--bottom-right--top-right'   : [27, 0], // hack
+                'movement--unavailable--bottom-right--right'       : [28, 0],
+                'movement--unavailable--bottom--bottom-right'      : [29, 0],
+                'movement--unavailable--bottom-left--bottom-right' : [29, 0], // hack
+                'movement--unavailable--bottom-left--bottom'       : [30, 0],
+                'movement--unavailable--left--bottom-left'         : [31, 0],
+                'movement--unavailable--top-left--left'            : [32, 0],
+                'movement--unavailable--top--top-left'             : [33, 0],
+                'movement--unavailable--top-right--top-left'       : [33, 0], // hack
+                'movement--unavailable--top'                       : [34, 0]
             }
         },
         resource: {
@@ -269,11 +274,11 @@ var Game = {
     },
 
     width: function() {
-        return this.grid.cols * this.grid.tile.width;
+        return this.grid.cols * this.grid.tileSize;
     },
 
     height: function() {
-        return this.grid.rows * this.grid.tile.height;
+        return this.grid.rows * this.grid.tileSize;
     },
 
     start: function() {
@@ -287,7 +292,7 @@ var Game = {
     locateCreature: function(entityType, x, y) {
         for (var _x = x - 1; _x <= x + 1; _x++) {
             for (var _y = y - 1; _y <= y + 1; _y++) {
-                Game.markTileTemporaryUnwalkable(_x, y);
+                Game.markTileTemporaryUnwalkable(_x, _y);
             }
         }
 

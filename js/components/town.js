@@ -24,8 +24,8 @@ Crafty.c('town', {
      */
     at: function(x, y) {
         this.attr({
-            x: x * Game.grid.tile.size - this.collisionMarginLeft,
-            y: y * Game.grid.tile.size - Game.components.town.tile.height + Game.grid.tile.size
+            x: x * Game.grid.tileSize - this.collisionMarginLeft,
+            y: y * Game.grid.tileSize - Game.components.town.tile.height + Game.grid.tileSize
         });
         return this;
     },
@@ -36,13 +36,13 @@ Crafty.c('town', {
     initCollision: function() {
         var polygon = new Crafty.polygon(
             // top left
-            [this.collisionMarginLeft,                        Game.components.town.tile.height - Game.grid.tile.height],
+            [this.collisionMarginLeft,                      Game.components.town.tile.height - Game.grid.tileSize],
             // top right
-            [this.collisionMarginLeft + Game.grid.tile.width, Game.components.town.tile.height - Game.grid.tile.height],
+            [this.collisionMarginLeft + Game.grid.tileSize, Game.components.town.tile.height - Game.grid.tileSize],
             // bottom right
-            [this.collisionMarginLeft + Game.grid.tile.width, Game.components.town.tile.height],
+            [this.collisionMarginLeft + Game.grid.tileSize, Game.components.town.tile.height],
             // bottom left
-            [this.collisionMarginLeft,                        Game.components.town.tile.height]
+            [this.collisionMarginLeft,                      Game.components.town.tile.height]
         );
 
         this.collision(polygon);
