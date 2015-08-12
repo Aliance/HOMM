@@ -3,6 +3,20 @@
 ## Как вырезать бирюзовый фон из оригинальных bmp
 
 1. Положить оригинальную картинку(-и) в папку `_extracted`
-2. выполнить в консоле `php pathToExtractedDirectory/transparency.php`
+2. Выполнить в консоле `php pathToExtractedDirectory/transparency.php`
 3. Оригинальный файл bmp превратится в png с вырезанным бирюзовым цветом и будет удалён.
+4. PROFIT!
+
+## Как имея список картинок png создать из них спрайт
+
+1. Положить все картинки в папку `_extracted`
+2. Выполнить в консоле `php pathToExtractedDirectory/sprite.php`
+3. Оригинальные файлы png превратятся в png-спрайт, склееный по горизонтали
+4. PROFIT!
+
+## Как имея одну png создать спрайт всех четырёх её поворотов
+
+1. Положить оригинальную картинку в папку `_extracted`
+2. Выполнить в консоле `php pathToExtractedDirectory/rotator.php pathToImageDirectory/image.png`
+3. Оригинальный файл png превратится в png-спрайт со всеми поворотами (углы поворота - 0, 90, 180 и 270 градусов)
 4. PROFIT!
