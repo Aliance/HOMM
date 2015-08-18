@@ -1,12 +1,11 @@
-Crafty.c('resource', {
+Crafty.c('mine', {
     init: function() {
         this.requires('grid')
-            .addComponent('Collision')
             //.addComponent('SolidHitBox') // DEBUG
-            .onHit('hero', this.destroy)
+            //.addComponent('VisibleMBR') // DEBUG
             .attr({
-                w: Game.components.resource.tile.width,
-                h: Game.components.resource.tile.height,
+                w: Game.components.mine.tile.width,
+                h: Game.components.mine.tile.height,
                 z: 2
             })
     },
@@ -18,7 +17,7 @@ Crafty.c('resource', {
      */
     at: function(x, y) {
         this.attr({
-            x: x * Game.grid.tileSize - Game.grid.tileSize,
+            x: x * Game.grid.tileSize,
             y: y * Game.grid.tileSize
         });
         return this;

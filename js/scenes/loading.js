@@ -69,30 +69,10 @@ Crafty.defineScene('Loading', function() {
                 map: Game.components.water.map,
                 paddingX: 1
             },
-            './images/resources/tiles.png': {
-                tile: Game.grid.tileSize,
-                tileh: Game.grid.tileSize,
-                map: Game.components.resource.map
-            },
-            './images/heroes/knight.png': {
-                tile: Game.components.hero.tile.width,
-                tileh: Game.components.hero.tile.height,
-                map: Game.components.hero.getMap('knight')
-            },
-            './images/heroes/death-knight.png': {
-                tile: Game.components.hero.tile.width,
-                tileh: Game.components.hero.tile.height,
-                map: Game.components.hero.getMap('death-knight')
-            },
-            './images/movement.png': {
+            './images/sprites/movement.png': {
                 tile: Game.grid.tileSize,
                 tileh: Game.grid.tileSize,
                 map: Game.components.movement.map
-            },
-            './images/towns/tiles.png': {
-                tile: Game.components.town.tile.width,
-                tileh: Game.components.town.tile.height,
-                map: Game.components.town.map
             },
             './images/creatures/lazure.png': {
                 tile: Game.components.creatures.tile.width,
@@ -103,6 +83,70 @@ Crafty.defineScene('Loading', function() {
                 tile: Game.components.object.tile.width,
                 tileh: Game.components.object.tile.height,
                 map: Game.components.object.map
+            },
+            /* MINES */
+            './images/sprites/mines.png': {
+                tile: Game.components.mine.tile.width,
+                tileh: Game.components.mine.tile.height,
+                map: Game.components.mine.map
+            },
+            /* RESOURCES */
+            './images/sprites/resources.png': {
+                tile: Game.components.resource.tile.width,
+                tileh: Game.components.resource.tile.height,
+                map: Game.components.resource.map
+            },
+            /* TOWNS */
+            './images/sprites/towns.png': {
+                tile: Game.components.town.tile.width,
+                tileh: Game.components.town.tile.height,
+                map: Game.components.town.map
+            },
+            /* HEROES */
+            './images/heroes/alchemist.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('alchemist')
+            },
+            './images/heroes/cleric.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('cleric')
+            },
+            './images/heroes/death-knight.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('death-knight')
+            },
+            './images/heroes/demoniac.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('demoniac')
+            },
+            './images/heroes/druid.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('druid')
+            },
+            './images/heroes/heretic.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('heretic')
+            },
+            './images/heroes/knight.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('knight')
+            },
+            './images/heroes/ranger.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('ranger')
+            },
+            './images/heroes/wizard.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('wizard')
             }
         }
     };

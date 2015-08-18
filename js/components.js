@@ -45,7 +45,7 @@ Crafty.c('water--inner-corner', {
             'water--inner-corner--1',
             'water--inner-corner--2',
             'water--inner-corner--3',
-            'water--inner-corner--4',
+            'water--inner-corner--4'
         ];
         var tileType = tileTypes[random(0, tileTypes.length - 1)];
         this.requires('tile, ' + tileType);
@@ -58,7 +58,7 @@ Crafty.c('water--vert', {
             'water--vert--1',
             'water--vert--2',
             'water--vert--3',
-            'water--vert--4',
+            'water--vert--4'
         ];
         var tileType = tileTypes[random(0, tileTypes.length - 1)];
         this.requires('tile, ' + tileType);
@@ -71,7 +71,7 @@ Crafty.c('water--hor', {
             'water--hor--1',
             'water--hor--2',
             'water--hor--3',
-            'water--hor--4',
+            'water--hor--4'
         ];
         var tileType = tileTypes[random(0, tileTypes.length - 1)];
         this.requires('tile, ' + tileType);
@@ -84,7 +84,7 @@ Crafty.c('water--small-corner', {
             'water--small-corner--1',
             'water--small-corner--2',
             'water--small-corner--3',
-            'water--small-corner--4',
+            'water--small-corner--4'
         ];
         var tileType = tileTypes[random(0, tileTypes.length - 1)];
         this.requires('tile, ' + tileType);
@@ -97,7 +97,7 @@ Crafty.c('water--corner', {
             'water--corner--1',
             'water--corner--2',
             'water--corner--3',
-            'water--corner--4',
+            'water--corner--4'
         ];
         var tileType = tileTypes[random(0, tileTypes.length - 1)];
         this.requires('tile, ' + tileType);

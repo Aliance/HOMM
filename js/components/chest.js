@@ -4,25 +4,26 @@
  * 31% chance for 2000 Gold or 1500 experience;
  * 5% chance for random Treasure Artifact. If backpack is full, get choice of 1000 Gold or 500 experience;
  */
-Crafty.c('treasure-chest', {
+Crafty.c('chest', {
     init: function() {
         this.requires('grid')
-            .addComponent('SpriteAnimation, shining--treasure-chest')
-            .reel('shining', Game.components.resource.animationDuration, Game.components.resource.animation['treasure-chest'])
+            .addComponent('SpriteAnimation, shining--chest')
+            .reel('shining', Game.components.resource.animationDuration, Game.components.resource.animation['chest'])
             .animate('shining', -1)
             .addComponent('Collision')
             //.addComponent('SolidHitBox') // DEBUG
+            //.addComponent('VisibleMBR') // DEBUG
             .onHit('hero', this.pickUp)
             .attr({
-                w: Game.grid.tileSize,
-                h: Game.grid.tileSize,
+                w: Game.components.resource.tile.width,
+                h: Game.components.resource.tile.height,
                 z: 2
             })
     },
 
     at: function(x, y) {
         this.attr({
-            x: x * Game.grid.tileSize,
+            x: x * Game.grid.tileSize - Game.grid.tileSize,
             y: y * Game.grid.tileSize
         });
         return this;

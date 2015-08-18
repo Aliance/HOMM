@@ -1,12 +1,12 @@
 Crafty.c('town', {
     init: function() {
-        this.collisionMarginLeft = 80;
+        this.collisionMarginLeft = 96;
 
         this.isVisited = false;
 
         this.requires('grid')
             .addComponent('Collision')
-            .addComponent('SolidHitBox') // DEBUG
+            //.addComponent('SolidHitBox') // DEBUG
             //.addComponent('VisibleMBR') // DEBUG
             .attr({
                 w: Game.components.town.tile.width,

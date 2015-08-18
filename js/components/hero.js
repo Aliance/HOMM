@@ -1,7 +1,5 @@
 Crafty.c('hero', {
     init: function() {
-        this.marginLeft = 6;
-
         this.requires('grid')
             .addComponent('SpriteAnimation, Tween, Collision, MoveTo')
             //.addComponent('SolidHitBox') // DEBUG
@@ -26,8 +24,8 @@ Crafty.c('hero', {
      */
     at: function(x, y) {
         this.attr({
-            x: x * Game.grid.tileSize - this.marginLeft,
-            y: y * Game.grid.tileSize - Game.components.hero.tile.height + Game.grid.tileSize
+            x: x * Game.grid.tileSize - Game.grid.tileSize,
+            y: y * Game.grid.tileSize - Game.grid.tileSize
         });
         return this;
     },
@@ -37,8 +35,8 @@ Crafty.c('hero', {
      */
     getTile: function() {
         return {
-            x: Math.floor((this.x + this.marginLeft) / Game.grid.tileSize),
-            y: Math.floor((this.y + Game.components.hero.tile.height - Game.grid.tileSize) / Game.grid.tileSize)
+            x: Math.floor((this.x + Game.grid.tileSize) / Game.grid.tileSize),
+            y: Math.floor((this.y + Game.grid.tileSize) / Game.grid.tileSize)
         };
     },
 
@@ -164,8 +162,62 @@ Crafty.c('hero', {
         Game.grid.objectMatrix[newPosition.y][newPosition.x] = CONST_TEMPORARY_NOT_WALKABLE;
 
         this.animate('walk_'+ orientation)
-            .bind('AnimationEnd', function() {
-                t.stand(orientation).unbind('AnimationEnd');
+            .one('AnimationEnd', function() {
+                t.stand(orientation);
+            })
+            .tween(tween, Game.components.hero.moveDuration)
+        ;
+    },
+
+    movePath: function() {
+        console.log('movePath: %O', this.path);
+
+        // вырезаем начальную точку, где стоит герой
+        this.path.shift();
+
+        // и вызываем рекурсивно функцию движения, передавая ей точку, куда следует идти в след. шаге
+        this._move(this.path.shift());
+    },
+
+    _move: function(tile) {
+        Crafty('movement').get(0).destroy();
+
+        var oldPosition = this.getTile();
+
+        var t = this;
+        var direction = '';
+        var tween = {};
+        var movement = Game.components.hero.movement;
+
+        if (tile[1] > oldPosition.y) {
+            direction += 's';
+            orientation = 'bottom';
+            tween.y = this.y + movement;
+        } else if (tile[1] < oldPosition.y) {
+            direction += 'n';
+            orientation = 'top';
+            tween.y = this.y - movement;
+        }
+
+        if (tile[0] > oldPosition.x) {
+            direction += 'e';
+            orientation = 'right';
+            tween.x = this.x + movement;
+        } else if (tile[0] < oldPosition.x) {
+            direction += 'w';
+            orientation = 'left';
+            tween.x = this.x - movement;
+        }
+
+        console.log('moving: %s / %s', direction, orientation);
+
+        this.animate('walk_'+ orientation)
+            .one('AnimationEnd', function() {
+                t.stand(orientation);
+
+                if (t.path.length) {
+                    t._move(t.path.shift());
+                }
             })
             .tween(tween, Game.components.hero.moveDuration)
         ;
@@ -177,13 +229,13 @@ Crafty.c('hero', {
     initCollision: function() {
         var polygon = new Crafty.polygon(
             // top left
-            [this.marginLeft + 1,                      Game.components.hero.tile.height - Game.grid.tileSize + 1],
+            [Game.grid.tileSize,     Game.grid.tileSize],
             // top right
-            [this.marginLeft + Game.grid.tileSize - 1, Game.components.hero.tile.height - Game.grid.tileSize + 1],
+            [Game.grid.tileSize * 2, Game.grid.tileSize],
             // bottom right
-            [this.marginLeft + Game.grid.tileSize - 1, Game.components.hero.tile.height - 1],
+            [Game.grid.tileSize * 2, Game.grid.tileSize * 2],
             // bottom left
-            [this.marginLeft + 1,                      Game.components.hero.tile.height - 1]
+            [Game.grid.tileSize,     Game.grid.tileSize * 2]
         );
 
         this.collision(polygon);

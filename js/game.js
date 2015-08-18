@@ -33,6 +33,11 @@ var Game = {
          */
         objectMatrix: []
     },
+    color: null,
+    heroes: [],
+    activeHero: null,
+    towns: [],
+    activeTown: null,
     finderComponent: new PF.AStarFinder({
         allowDiagonal: true
     }),
@@ -117,18 +122,46 @@ var Game = {
                 'movement--unavailable--top'                       : [34, 0]
             }
         },
+        mine: {
+            tile: {
+                width:  68,
+                height: 54
+            },
+            type: [
+                'crystal',
+                'gem',
+                'gold',
+                'mercury',
+                'ore',
+                'sulphur',
+                'wood'
+            ],
+            map: {
+                'mine--crystal' : [0, 0],
+                'mine--gem'     : [1, 0],
+                'mine--gold'    : [2, 0],
+                'mine--mercury' : [3, 0],
+                'mine--ore'     : [4, 0],
+                'mine--sulphur' : [5, 0],
+                'mine--wood'    : [6, 0]
+            }
+        },
         resource: {
+            tile: {
+                width:  64,
+                height: 32
+            },
             animation: [],
             animationDuration: 1500,
             map: {
-                'shining--gold'          : [0, 0],
-                'shining--treasure-chest': [0, 1],
-                'shining--sulphur'       : [0, 2],
-                'shining--mercury'       : [1, 2],
-                'shining--wood'          : [2, 2],
-                'shining--ore'           : [3, 2],
-                'shining--gem'           : [0, 3],
-                'shining--crystal'       : [0, 4]
+                'shining--mercury' : [0, 0],
+                'shining--ore'     : [0, 1],
+                'shining--sulphur' : [0, 2],
+                'shining--wood'    : [0, 3],
+                'shining--chest'   : [0, 4],
+                'shining--crystal' : [0, 5],
+                'shining--gem'     : [0, 6],
+                'shining--gold'    : [0, 7]
             },
             createAnimation: function() {
                 var createAnimationMap = function(from, to, y) {
@@ -141,34 +174,34 @@ var Game = {
                     return map;
                 };
 
-                Game.components.resource.animation['gold']           = createAnimationMap(0, 7, 0);
-                Game.components.resource.animation['treasure-chest'] = createAnimationMap(0, 7, 1);
-                Game.components.resource.animation['gem']            = createAnimationMap(0, 7, 3);
-                Game.components.resource.animation['crystal']        = createAnimationMap(0, 7, 4);
+                Game.components.resource.animation['chest']   = createAnimationMap(0, 7, 4);
+                Game.components.resource.animation['crystal'] = createAnimationMap(0, 7, 5);
+                Game.components.resource.animation['gem']     = createAnimationMap(0, 7, 6);
+                Game.components.resource.animation['gold']    = createAnimationMap(0, 7, 7);
             }
         },
         hero: {
             tile: {
-                width:  50,
-                height: 59
+                width:  96,
+                height: 64
             },
             movement: 32,
             moveDuration: 500,
             skinPrefix: 'hero_',
             type: [
-                //'alchemist',
+                'alchemist',
                 //'barbarian',
                 //'battle-mage',
                 //'beastmaster',
-                //'cleric',
+                'cleric',
                 //'death-knight',
-                //'demoniac',
-                //'druid',
-                //'heretic',
+                'demoniac',
+                'druid',
+                'heretic',
                 'knight',
                 //'necromancer',
                 //'overlord',
-                //'ranger',
+                'ranger',
                 //'warlock',
                 //'witch'
             ],
@@ -213,25 +246,37 @@ var Game = {
                 'necropolis',
                 'dungeon',
                 'stronghold',
-                'fortress'
+                'fortress',
+                'conflux'
             ],
             map: {
-                'castle'    : [0, 0],
-                'rampart'   : [1, 0],
-                'tower'     : [2, 0],
-                'inferno'   : [3, 0],
-                'necropolis': [4, 0],
-                'dungeon'   : [5, 0],
-                'stronghold': [6, 0],
-                'fortress'  : [7, 0],
-                'castle-village'    : [0, 1],
-                'rampart-village'   : [1, 1],
-                'tower-village'     : [2, 1],
-                'inferno-village'   : [3, 1],
-                'necropolis-village': [4, 1],
-                'dungeon-village'   : [5, 1],
-                'stronghold-village': [6, 1],
-                'fortress-village'  : [7, 1]
+                'castle-village'    : [0, 0],
+                'rampart-village'   : [0, 1],
+                'tower-village'     : [0, 2],
+                'inferno-village'   : [0, 3],
+                'necropolis-village': [0, 4],
+                'dungeon-village'   : [0, 5],
+                'stronghold-village': [0, 6],
+                'fortress-village'  : [0, 7],
+                'conflux-village'   : [0, 8],
+                'castle'    : [1, 0],
+                'rampart'   : [1, 1],
+                'tower'     : [1, 2],
+                'inferno'   : [1, 3],
+                'necropolis': [1, 4],
+                'dungeon'   : [1, 5],
+                'stronghold': [1, 6],
+                'fortress'  : [1, 7],
+                'conflux'   : [1, 8],
+                'castle-capital'    : [2, 0],
+                'rampart-capital'   : [2, 1],
+                'tower-capital'     : [2, 2],
+                'inferno-capital'   : [2, 3],
+                'necropolis-capital': [2, 4],
+                'dungeon-capital'   : [2, 5],
+                'stronghold-capital': [2, 6],
+                'fortress-capital'  : [2, 7],
+                'conflux-capital'   : [2, 8]
             }
         },
         creatures: {
@@ -326,6 +371,14 @@ var Game = {
         return this.locateEntity('town', x, y).addComponent(entity);
     },
 
+    locateMine: function(entity, x, y) {
+        // TODO: Game.markTileUnwalkable(x + 1, y);
+
+        console.log('mine: %s', entity);
+
+        return this.locateEntity('mine', x, y).addComponent('mine--' + entity);
+    },
+
     locateObject: function(entity, x, y) {
         Game.markTileUnwalkable(x, y);
         Game.markTileUnwalkable(x + 1, y);
@@ -333,6 +386,15 @@ var Game = {
         console.log('object: %s', entity);
 
         return this.locateEntity('object', x, y).addComponent(entity);
+    },
+
+    locateHero: function(entity, x, y) {
+        Game.grid.matrix[y][x] = CONST_NOT_WALKABLE;
+        Game.grid.objectMatrix[y][x] = CONST_TEMPORARY_NOT_WALKABLE;
+
+        console.log('hero: %s', entity);
+
+        return this.locateEntity('hero', x, y).setType(entity).stand('right');
     },
 
     locateItem: function(entity, x, y) {

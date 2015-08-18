@@ -8,6 +8,7 @@ Crafty.c('movement', {
                 h: Game.grid.tileSize,
                 z: 30
             })
+        ;
     },
 
     at: function(x, y) {
@@ -16,5 +17,21 @@ Crafty.c('movement', {
             y: y * Game.grid.tileSize
         });
         return this;
+    },
+
+    availableTarget: function() {
+        this.requires('Mouse')
+            .addComponent('movement--available--target')
+            .one('MouseDown', this._move);
+        return this;
+    },
+
+    _move: function(e) {
+        e.preventDefault();
+
+        // TODO: only active hero
+        var activeHero = Crafty('hero');
+
+        activeHero.movePath();
     }
 });

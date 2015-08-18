@@ -66,7 +66,7 @@ Crafty.c('MoveTo', {
 
             if (i == l - 1) {
                 // рисуем крестик
-                entity.addComponent('movement--available--target');
+                entity.availableTarget();
             } else {
                 // рисуем стрелочки
                 entity.addComponent(this._getMovementEntity(bits[i], bits[i + 1]));
