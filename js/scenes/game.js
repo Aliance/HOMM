@@ -8,6 +8,15 @@ Crafty.defineScene('Game', function() {
 
         for (var x = 0; x < Game.grid.cols; x++) {
             var terrain, from, to, angle = 0, flip = null;
+
+            if (typeof mapData.landscape.terrain[y] === 'undefined') {
+                mapData.landscape.terrain[y] = new Array(x);
+            }
+
+            if (typeof mapData.landscape.terrain[y][x] === 'undefined') {
+                mapData.landscape.terrain[y][x] = CONST_LANDSCAPE_TILE_WATER;
+            }
+
             switch (mapData.landscape.terrain[y][x]) {
                 // 1 - 24
                 case CONST_LANDSCAPE_TILE_GRASS:
@@ -119,10 +128,109 @@ Crafty.defineScene('Game', function() {
             }
             // TODO: water => unwalkable
             Game.locateLandscape('landscape', x, y, angle).placeRandomTerrain(terrain, from, to, angle, flip);
+
+            // RIVERS
+
+
+            if (typeof mapData.landscape.rivers[x] !== 'undefined' && typeof mapData.landscape.rivers[x][y] !== 'undefined') {
+                var river = mapData.landscape.rivers[x][y],
+                    riverType = null,
+                    riverTile = 0,
+                    riverFlip = [];
+
+                if (river & CONST_RIVER_TYPE_NORMAL) {
+                    riverType = 'normal';
+                } else if (river & CONST_RIVER_TYPE_ICY) {
+                    riverType = 'icy';
+                } else if (river & CONST_RIVER_TYPE_LAVA) {
+                    riverType = 'lava';
+                } else if (river & CONST_RIVER_TYPE_DIRTY) {
+                    riverType = 'dirty';
+                } else {
+                    console.log('river type not found at %d, %d', x, y);
+                    Crafty.enterScene('Error');
+                    throw new Error('river landscape error');
+                }
+
+                if (river & CONST_RIVER_FLIP_X) {
+                    riverFlip.push('X');
+                }
+                if (river & CONST_RIVER_FLIP_Y) {
+                    riverFlip.push('Y');
+                }
+
+                if (river & CONST_RIVER_TILE_CORNER) {
+                    riverTile = Crafty.math.randomInt(1, 4);
+                } else if (river & CONST_RIVER_TILE_CROSS) {
+                    riverTile = 5;
+                } else if (river & CONST_RIVER_TILE_HORIZONTAL_CORNER) {
+                    riverTile = Crafty.math.randomInt(6, 7);
+                } else if (river & CONST_RIVER_TILE_VERTICAL_CORNER) {
+                    riverTile = Crafty.math.randomInt(8, 9);
+                } else if (river & CONST_RIVER_TILE_VERTICAL) {
+                    riverTile = Crafty.math.randomInt(10, 11);
+                } else if (river & CONST_RIVER_TILE_HORIZONTAL) {
+                    riverTile = Crafty.math.randomInt(12, 13);
+                }
+
+                Game.locateRiver(riverType, x, y).placeRandomTile(riverType, riverTile, riverFlip);
+            }
+
+            // ROADS
+            if (typeof mapData.landscape.roads[x] !== 'undefined' && typeof mapData.landscape.roads[x][y] !== 'undefined') {
+                var road = mapData.landscape.roads[x][y],
+                    roadType = null,
+                    roadTile = 0,
+                    roadFlip = [];
+
+                if (road & CONST_ROAD_TYPE_COBBLESTONE) {
+                    roadType = 'cobblestone';
+                } else if (road & CONST_ROAD_TYPE_GRAVEL) {
+                    roadType = 'gravel';
+                } else if (road & CONST_ROAD_TYPE_DIRT) {
+                    roadType = 'dirt';
+                } else {
+                    console.log('road type not found at %d, %d', x, y);
+                    Crafty.enterScene('Error');
+                    throw new Error('road landscape error');
+                }
+
+                if (road & CONST_ROAD_FLIP_X) {
+                    roadFlip.push('X');
+                }
+                if (road & CONST_ROAD_FLIP_Y) {
+                    roadFlip.push('Y');
+                }
+
+                if (road & CONST_ROAD_TILE_CORNER) {
+                    roadTile = Crafty.math.randomInt(1, 2);
+                } else if (road & CONST_ROAD_TILE_DIAGONAL) {
+                    roadTile = Crafty.math.randomInt(3, 6);
+                } else if (road & CONST_ROAD_TILE_VERTICAL_CORNER) {
+                    roadTile = Crafty.math.randomInt(7, 8);
+                } else if (road & CONST_ROAD_TILE_HORIZONTAL_CORNER) {
+                    roadTile = Crafty.math.randomInt(9, 10);
+                } else if (road & CONST_ROAD_TILE_VERTICAL) {
+                    roadTile = Crafty.math.randomInt(11, 12);
+                } else if (road & CONST_ROAD_TILE_HORIZONTAL) {
+                    roadTile = Crafty.math.randomInt(13, 14);
+                } else if (road & CONST_ROAD_TILE_VERTICAL_END) {
+                    roadTile = 15;
+                } else if (road & CONST_ROAD_TILE_HORIZONTAL_END) {
+                    roadTile = 16;
+                } else if (road & CONST_ROAD_TILE_CROSS) {
+                    roadTile = 17;
+                }
+
+                Game.locateRoad(roadType, x, y).placeRandomTile(roadType, roadTile, roadFlip);
+            }
         }
     }
 
-    Game.locateHero(Crafty.math.randomElementOfArray(Game.components.hero.type), 12, 8);
+    var hero = Game.locateHero(Crafty.math.randomElementOfArray(Game.components.hero.type), 12, 8);
+    Game.heroes.push(hero);
+    Game.activeHero = hero;
+    //Crafty.viewport.centerOn(hero, 1000);
 
     Game.locateItem('crystal', 11, 11);
     Game.locateItem('gold', 10, 11);
@@ -133,18 +241,19 @@ Crafty.defineScene('Game', function() {
     Game.locateItem('wood', 4, 4);
     Game.locateItem('mercury', 3, 3);
 
-    var town = Crafty.math.randomElementOfArray(Game.components.town.type);
+    var townType = Crafty.math.randomElementOfArray(Game.components.town.type);
     switch (Crafty.math.randomInt(1, 3)) {
         case 1:
-            town += '-village';
+            townType += '-village';
             break;
         case 2:
             break;
         case 3:
-            town += '-capital';
+            townType += '-capital';
             break;
     }
-    Game.locateTown(town, 12, 7);
+    var town = Game.locateTown(townType, 12, 7);
+    Game.towns.push(town);
 
     Game.locateObject('obj1', 15, 7);
 

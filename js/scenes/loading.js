@@ -9,6 +9,7 @@ Crafty.defineScene('Loading', function() {
 
     var assets = {
         'sprites': {
+            /* TERRAIN */
             './images/landscape/dirt.png': {
                 tile: Game.grid.tileSize,
                 tileh: Game.grid.tileSize,
@@ -69,20 +70,35 @@ Crafty.defineScene('Loading', function() {
                 map: Game.components.water.map,
                 paddingX: 1
             },
+            /* MOVEMENT */
             './images/sprites/movement.png': {
                 tile: Game.grid.tileSize,
                 tileh: Game.grid.tileSize,
                 map: Game.components.movement.map
             },
+            /* CREATURES */
             './images/creatures/lazure.png': {
                 tile: Game.components.creatures.tile.width,
                 tileh: Game.components.creatures.tile.height,
                 map: Game.components.creatures.map
             },
+            /* MAP OBJECTS */
             './images/objects/terrain/AVLctrg0.png': {
                 tile: Game.components.object.tile.width,
                 tileh: Game.components.object.tile.height,
                 map: Game.components.object.map
+            },
+            /* ROADS */
+            './images/sprites/road.png': {
+                tile: Game.grid.tileSize,
+                tileh: Game.grid.tileSize,
+                map: Game.components.road.map
+            },
+            /* RIVERS */
+            './images/sprites/river.png': {
+                tile: Game.grid.tileSize,
+                tileh: Game.grid.tileSize,
+                map: Game.components.river.map
             },
             /* MINES */
             './images/sprites/mines.png': {

@@ -2,14 +2,27 @@ var CONST_WALKABLE = 0;
 var CONST_NOT_WALKABLE = 1;
 var CONST_TEMPORARY_NOT_WALKABLE = 2;
 
-var createComponentMap = function(prefix, to) {
+var createComponentMap = function(prefix, to, _y) {
     var map = {};
+    var y = _y || 0;
 
     for (var i = 1; i <= to; i++) {
-        map[prefix + '-' + i] = [i - 1, 0];
+        map[prefix + '-' + i] = [i - 1, y];
     }
 
     return map;
+};
+
+var extend = function() {
+    var ret = {};
+    var len = arguments.length;
+    for (var i = 0; i < len; i++) {
+        for (var p in arguments[i]) if (arguments[i].hasOwnProperty(p)) {
+            ret[p] = arguments[i][p];
+        }
+    }
+
+    return ret;
 };
 
 var Game = {
@@ -20,8 +33,8 @@ var Game = {
          *  L: 108*108
          * XL: 144*144
          */
-        rows: 14, // height / y
-        cols: 20, // width / x
+        rows: 36, // height / y
+        cols: 36, // width / x
         tileSize:  32,
         /**
          * Матрица проходимости для pathfinding. 0 - проходимая, 1 - нет.
@@ -71,6 +84,30 @@ var Game = {
         },
         water: {
             map: createComponentMap('water', 33)
+        },
+        road: {
+            type: [
+                'cobblestone',
+                'gravel',
+                'dirt'
+            ],
+            map: extend(
+                createComponentMap('road--cobblestone', 17, 0),
+                createComponentMap('road--gravel', 17, 1),
+                createComponentMap('road--dirt', 17, 2)
+            )
+        },
+        river: {
+            type: [
+                'icy',
+                'lava',
+                'dirty'
+            ],
+            map: extend(
+                createComponentMap('river--icy', 13, 0),
+                createComponentMap('river--lava', 13, 1),
+                createComponentMap('river--dirty', 13, 2)
+            )
         },
         movement: {
             map: {
@@ -330,6 +367,9 @@ var Game = {
         $container.empty();
 
         Crafty.init(Game.width(), Game.height(), $container.get(0));
+        Crafty.viewport.clampToEntities = false;
+        //Crafty.viewport.bounds = {min:{x:0, y:0}, max:{x:320, y:320}};
+        //Crafty.viewport.init(320, 320);
 
         Crafty.enterScene('Loading');
     },
@@ -379,6 +419,18 @@ var Game = {
         return this.locateEntity('mine', x, y).addComponent('mine--' + entity);
     },
 
+    locateRoad: function(entity, x, y) {
+        console.log('road: %s', entity);
+
+        return this.locateEntity('road', x, y);
+    },
+
+    locateRiver: function(entity, x, y) {
+        console.log('river: %s', entity);
+
+        return this.locateEntity('river', x, y);
+    },
+
     locateObject: function(entity, x, y) {
         Game.markTileUnwalkable(x, y);
         Game.markTileUnwalkable(x + 1, y);
@@ -412,7 +464,7 @@ var Game = {
     },
 
     locateEntity: function(entity, x, y, angle) {
-        console.log('%s - %s, %s', entity, x, y);
+        //console.log('%s - %s, %s', entity, x, y);
 
         switch (angle) {
             case 90:

@@ -137,8 +137,6 @@ Crafty.c('MoveTo', {
             }
         }
 
-        // TODO: fix the bug with the 'movement--available--top-right--top-left' entity
-
         console.log(entity);
 
         return entity;

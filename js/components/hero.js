@@ -217,6 +217,8 @@ Crafty.c('hero', {
 
                 if (t.path.length) {
                     t._move(t.path.shift());
+                } else {
+                    Game.activeHero.disregardMouseInput = false;
                 }
             })
             .tween(tween, Game.components.hero.moveDuration)

@@ -1,7 +1,6 @@
 Crafty.c('movement', {
     init: function() {
         this.requires('grid')
-            //.addComponent('movement-available')
             //.addComponent('VisibleMBR') // DEBUG
             .attr({
                 w: Game.grid.tileSize,
@@ -26,12 +25,12 @@ Crafty.c('movement', {
         return this;
     },
 
+    /**
+     * @param {MouseEvent} e
+     * @private
+     */
     _move: function(e) {
-        e.preventDefault();
-
-        // TODO: only active hero
-        var activeHero = Crafty('hero');
-
-        activeHero.movePath();
+        Game.activeHero.disregardMouseInput = true;
+        Game.activeHero.movePath();
     }
 });
