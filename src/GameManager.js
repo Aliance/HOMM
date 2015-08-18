@@ -28,7 +28,7 @@ export default class GameManager {
             preload: (game) => {
                 game.load.spritesheet('terrain-g', require('file!images/tiles/grass.bmp'), this.tileSize, this.tileSize, 10, null, 1);
                 game.load.spritesheet('terrain-d', require('file!images/tiles/dirt.bmp'), this.tileSize, this.tileSize, 10, null, 1);
-                game.load.spritesheet('path', require('file!images/path.png'), this.tileSize, this.tileSize);
+                game.load.spritesheet('path', require('file!images/movement.png'), this.tileSize, this.tileSize);
                 game.load.spritesheet('hero-planeswalker', require('file!images/heroes/planeswalker.png'), 96, 64);
                 game.load.spritesheet('creature-dwarf', require('file!images/creatures/dwarf.png'), 64, 64);
                 game.load.spritesheet('map-chest', require('file!images/resources/chest.png'), 64, 32);
