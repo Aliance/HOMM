@@ -231,13 +231,13 @@ Crafty.c('hero', {
     initCollision: function() {
         var polygon = new Crafty.polygon(
             // top left
-            [Game.grid.tileSize,     Game.grid.tileSize],
+            [Game.grid.tileSize + 1,     Game.grid.tileSize + 1],
             // top right
-            [Game.grid.tileSize * 2, Game.grid.tileSize],
+            [Game.grid.tileSize * 2 - 1, Game.grid.tileSize + 1],
             // bottom right
-            [Game.grid.tileSize * 2, Game.grid.tileSize * 2],
+            [Game.grid.tileSize * 2 - 1, Game.grid.tileSize * 2 - 1],
             // bottom left
-            [Game.grid.tileSize,     Game.grid.tileSize * 2]
+            [Game.grid.tileSize + 1,     Game.grid.tileSize * 2 - 1]
         );
 
         this.collision(polygon);
