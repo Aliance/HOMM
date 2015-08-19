@@ -1,11 +1,17 @@
 <?php
 
+$vertically = false;
+
+if (isset($argv[1]) && $argv[1] == '-v') {
+    $vertically = true;
+}
+
 $allFiles = array_filter(scandir(__DIR__), function($v) { return substr(strtolower($v), -4) == '.png'; });
 
 $allFilesCount = count($allFiles);
 
 if (!$allFilesCount) {
-    echo 'No bmp files were found.', PHP_EOL;
+    echo 'No png files were found.', PHP_EOL;
     exit;
 }
 
@@ -34,7 +40,7 @@ echo 'All files were processed', PHP_EOL;
 
 $resultImage->resetIterator();
 
-$combinedImage = $resultImage->appendImages(false);
+$combinedImage = $resultImage->appendImages($vertically);
 
 $resultImage->clear();
 $resultImage->destroy();
