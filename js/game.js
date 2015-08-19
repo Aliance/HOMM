@@ -246,10 +246,14 @@ var Game = {
             getMap: function(type) {
                 var positions = {};
 
-                positions[type + '--move--right']  = [0, 0];
-                positions[type + '--move--left']   = [0, 1];
-                positions[type + '--move--bottom'] = [0, 2];
-                positions[type + '--move--top']    = [0, 3];
+                positions[type + '--move--e']  = [0, 0]; // →
+                positions[type + '--move--w']  = [0, 0]; // ←
+                positions[type + '--move--s']  = [0, 1]; // ↓
+                positions[type + '--move--n']  = [0, 2]; // ↑
+                positions[type + '--move--se'] = [0, 3]; // ↘
+                positions[type + '--move--sw'] = [0, 3]; // ↙
+                positions[type + '--move--ne'] = [0, 4]; // ↗
+                positions[type + '--move--nw'] = [0, 4]; // ↖
 
                 return positions;
             },
@@ -264,10 +268,14 @@ var Game = {
                     return map;
                 };
 
-                Game.components.hero.animation['walk_right']  = createAnimationMap(0, 7, 0);
-                Game.components.hero.animation['walk_left']   = createAnimationMap(0, 7, 1);
-                Game.components.hero.animation['walk_bottom'] = createAnimationMap(0, 7, 2);
-                Game.components.hero.animation['walk_top']    = createAnimationMap(0, 7, 3);
+                Game.components.hero.animation['walk_e']  = createAnimationMap(0, 8, 0); // →
+                Game.components.hero.animation['walk_w']  = createAnimationMap(0, 8, 0); // ←
+                Game.components.hero.animation['walk_s']  = createAnimationMap(0, 8, 1); // ↓
+                Game.components.hero.animation['walk_n']  = createAnimationMap(0, 8, 2); // ↑
+                Game.components.hero.animation['walk_se'] = createAnimationMap(0, 8, 3); // ↘
+                Game.components.hero.animation['walk_sw'] = createAnimationMap(0, 8, 3); // ↙
+                Game.components.hero.animation['walk_ne'] = createAnimationMap(0, 8, 4); // ↗
+                Game.components.hero.animation['walk_nw'] = createAnimationMap(0, 8, 4); // ↖
             }
         },
         town: {
@@ -446,7 +454,7 @@ var Game = {
 
         console.log('hero: %s', entity);
 
-        return this.locateEntity('hero', x, y).setType(entity).stand('right');
+        return this.locateEntity('hero', x, y).setType(entity).stand('e');
     },
 
     locateItem: function(entity, x, y) {

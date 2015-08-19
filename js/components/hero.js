@@ -1,4 +1,10 @@
 Crafty.c('hero', {
+    flipDirection: [
+        'sw',
+        'w',
+        'nw'
+    ],
+
     init: function() {
         this.requires('grid')
             .addComponent('SpriteAnimation, Tween, Collision, MoveTo')
@@ -63,16 +69,16 @@ Crafty.c('hero', {
 
             switch (e.key) {
                 case Crafty.keys.LEFT_ARROW:
-                    this.moveIt('left');
+                    this.moveIt('w');
                     break;
                 case Crafty.keys.RIGHT_ARROW:
-                    this.moveIt('right');
+                    this.moveIt('e');
                     break;
                 case Crafty.keys.UP_ARROW:
-                    this.moveIt('top');
+                    this.moveIt('n');
                     break;
                 case Crafty.keys.DOWN_ARROW:
-                    this.moveIt('bottom');
+                    this.moveIt('s');
                     break;
             }
         });
@@ -85,39 +91,54 @@ Crafty.c('hero', {
      * @returns {*}
      */
     initReels: function() {
-        this.reel('walk_right',  Game.components.hero.moveDuration, Game.components.hero.animation['walk_right'])
-            .reel('walk_left',   Game.components.hero.moveDuration, Game.components.hero.animation['walk_left'])
-            .reel('walk_bottom', Game.components.hero.moveDuration, Game.components.hero.animation['walk_bottom'])
-            .reel('walk_top',    Game.components.hero.moveDuration, Game.components.hero.animation['walk_top']);
+        this.reel('walk_e',  Game.components.hero.moveDuration, Game.components.hero.animation['walk_e'])
+            .reel('walk_w',  Game.components.hero.moveDuration, Game.components.hero.animation['walk_w'])
+            .reel('walk_s',  Game.components.hero.moveDuration, Game.components.hero.animation['walk_s'])
+            .reel('walk_n',  Game.components.hero.moveDuration, Game.components.hero.animation['walk_n'])
+            .reel('walk_se', Game.components.hero.moveDuration, Game.components.hero.animation['walk_se'])
+            .reel('walk_sw', Game.components.hero.moveDuration, Game.components.hero.animation['walk_sw'])
+            .reel('walk_ne', Game.components.hero.moveDuration, Game.components.hero.animation['walk_ne'])
+            .reel('walk_nw', Game.components.hero.moveDuration, Game.components.hero.animation['walk_nw'])
+        ;
 
         return this;
     },
 
     /**
      * Make the character stand
-     * @param {String} orientation
+     * @param {String} direction
      * @returns {*}
      */
-    stand: function(orientation) {
-        this.removeComponent(this.type + '--move--right');
-        this.removeComponent(this.type + '--move--left');
-        this.removeComponent(this.type + '--move--top');
-        this.removeComponent(this.type + '--move--bottom');
+    stand: function(direction) {
+        this.removeComponent(this.type + '--move--n');
+        this.removeComponent(this.type + '--move--ne');
+        this.removeComponent(this.type + '--move--e');
+        this.removeComponent(this.type + '--move--se');
+        this.removeComponent(this.type + '--move--s');
+        this.removeComponent(this.type + '--move--sw');
+        this.removeComponent(this.type + '--move--w');
+        this.removeComponent(this.type + '--move--nw');
 
-        this.addComponent(this.type + '--move--' + orientation);
+        this.addComponent(this.type + '--move--' + direction);
+
+        if ($.inArray(direction, this.flipDirection) !== -1) {
+            this.flip('X');
+        } else {
+            this.unflip('X');
+        }
 
         return this;
     },
 
     /**
      * Make the character move
-     * @param {String} orientation
+     * @param {String} direction
      * @returns {*}
      */
-    moveIt: function(orientation) {
+    moveIt: function(direction) {
         Crafty('movement').destroy();
 
-        this.stand(orientation);
+        this.stand(direction);
 
         var t = this,
             tween = {},
@@ -125,20 +146,20 @@ Crafty.c('hero', {
             newPosition = this.getTile(),
             movement = Game.components.hero.movement;
 
-        switch (orientation) {
-            case 'right':
+        switch (direction) {
+            case 'e':
                 tween.x = this.x + movement;
                 newPosition.x += 1;
                 break;
-            case 'left':
+            case 'w':
                 tween.x = this.x - movement;
                 newPosition.x -= 1;
                 break;
-            case 'bottom':
+            case 's':
                 tween.y = this.y + movement;
                 newPosition.y += 1;
                 break;
-            case 'top':
+            case 'n':
                 tween.y = this.y - movement;
                 newPosition.y -= 1;
                 break;
@@ -161,9 +182,9 @@ Crafty.c('hero', {
         Game.grid.matrix[newPosition.y][newPosition.x] = CONST_NOT_WALKABLE;
         Game.grid.objectMatrix[newPosition.y][newPosition.x] = CONST_TEMPORARY_NOT_WALKABLE;
 
-        this.animate('walk_'+ orientation)
+        this.animate('walk_'+ direction)
             .one('AnimationEnd', function() {
-                t.stand(orientation);
+                t.stand(direction);
             })
             .tween(tween, Game.components.hero.moveDuration)
         ;
@@ -191,29 +212,26 @@ Crafty.c('hero', {
 
         if (tile[1] > oldPosition.y) {
             direction += 's';
-            orientation = 'bottom';
             tween.y = this.y + movement;
         } else if (tile[1] < oldPosition.y) {
             direction += 'n';
-            orientation = 'top';
             tween.y = this.y - movement;
         }
 
         if (tile[0] > oldPosition.x) {
             direction += 'e';
-            orientation = 'right';
             tween.x = this.x + movement;
         } else if (tile[0] < oldPosition.x) {
             direction += 'w';
-            orientation = 'left';
             tween.x = this.x - movement;
         }
 
-        console.log('moving: %s / %s', direction, orientation);
+        console.log('moving: ' + direction);
 
-        this.animate('walk_'+ orientation)
+        this.stand(direction)
+            .animate('walk_'+ direction)
             .one('AnimationEnd', function() {
-                t.stand(orientation);
+                t.stand(direction);
 
                 if (t.path.length) {
                     t._move(t.path.shift());
