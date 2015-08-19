@@ -124,6 +124,21 @@ Crafty.defineScene('Loading', function() {
                 tileh: Game.components.hero.tile.height,
                 map: Game.components.hero.getMap('alchemist')
             },
+            './images/heroes/barbarian.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('barbarian')
+            },
+            './images/heroes/battle-mage.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('battle-mage')
+            },
+            './images/heroes/beastmaster.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('beastmaster')
+            },
             './images/heroes/cleric.png': {
                 tile: Game.components.hero.tile.width,
                 tileh: Game.components.hero.tile.height,
@@ -144,6 +159,11 @@ Crafty.defineScene('Loading', function() {
                 tileh: Game.components.hero.tile.height,
                 map: Game.components.hero.getMap('druid')
             },
+            './images/heroes/elementalist.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('elementalist')
+            },
             './images/heroes/heretic.png': {
                 tile: Game.components.hero.tile.width,
                 tileh: Game.components.hero.tile.height,
@@ -154,10 +174,35 @@ Crafty.defineScene('Loading', function() {
                 tileh: Game.components.hero.tile.height,
                 map: Game.components.hero.getMap('knight')
             },
+            './images/heroes/necromancer.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('necromancer')
+            },
+            './images/heroes/overlord.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('overlord')
+            },
+            './images/heroes/planeswalker.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('planeswalker')
+            },
             './images/heroes/ranger.png': {
                 tile: Game.components.hero.tile.width,
                 tileh: Game.components.hero.tile.height,
                 map: Game.components.hero.getMap('ranger')
+            },
+            './images/heroes/warlock.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('warlock')
+            },
+            './images/heroes/witch.png': {
+                tile: Game.components.hero.tile.width,
+                tileh: Game.components.hero.tile.height,
+                map: Game.components.hero.getMap('witch')
             },
             './images/heroes/wizard.png': {
                 tile: Game.components.hero.tile.width,
