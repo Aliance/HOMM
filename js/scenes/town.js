@@ -23,7 +23,7 @@ Crafty.defineScene('Town', function() {
 
     icon += Game.activeTown.getType();
 
-    Crafty.e('2D, DOM')
+    Crafty.e('2D, Canvas')
         .addComponent(icon)
         .attr({
             w: 56,
@@ -128,6 +128,26 @@ Crafty.defineScene('Town', function() {
             y: 434
         });
 
+    // Портрет героя-охранника
+    Crafty.e('2D, Canvas, Mouse')
+        .addComponent('gelly')
+        .attr({
+            z: 3,
+            x: 241,
+            y: 388
+        })
+        .bind('Click', function(e) { e.stopPropagation(); alert('guard-hero clicked') });
+
+    // Портрет героя-посетителя
+    Crafty.e('2D, Canvas, Mouse')
+        .addComponent(Game.activeHero.name)
+        .attr({
+            z: 3,
+            x: 241,
+            y: 483
+        })
+        .bind('Click', function(e) { e.stopPropagation(); alert('visitor-hero clicked') });
+
     // значки выбора городов справа
     for (var i = 0, l = Game.towns.length; i < l; i++) {
         var town = Game.towns[i];
@@ -141,13 +161,14 @@ Crafty.defineScene('Town', function() {
         }
         icon += town.getType();
 
-        Crafty.e('2D, Canvas')
+        Crafty.e('2D, Canvas, Mouse')
             .addComponent(icon)
             .attr({
                 z: 2,
                 x: 744,
                 y: 430 + i * 32
-            });
+            })
+            .bind('Click', function(e) { e.stopPropagation(); alert('town-chooser clicked') });
 
         // подсветку для текущего выбранного
         if (town[0] === Game.activeTown[0]) {

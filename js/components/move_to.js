@@ -14,6 +14,7 @@ Crafty.c('MoveTo', {
         this.to = {x:0, y:0};
 
         // TODO: mb bind this event not to all the map, but only for movable objects like grass?
+        //Crafty('landscape').bind('Click', this._onmousedown);
         Crafty.addEvent(this, Crafty.stage.elem, 'mousedown', this._onmousedown);
     },
 
@@ -35,7 +36,7 @@ Crafty.c('MoveTo', {
             return;
         }
 
-        this.from = this.getTile();
+        this.from = Game.activeHero.getTile();
 
         var gridComponent = new PF.Grid(Game.grid.cols, Game.grid.rows, Game.grid.matrix);
 

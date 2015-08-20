@@ -143,6 +143,11 @@ Crafty.defineScene('Loading', function() {
                 map: Game.components.townBuildingIcon.map
             },
             /* HEROES */
+            './images/heroes/portraits/big.png': {
+                tile: Game.components.heroPortraitBig.tile.width,
+                tileh: Game.components.heroPortraitBig.tile.height,
+                map: Game.components.heroPortraitBig.map
+            },
             './images/heroes/alchemist.png': {
                 tile: Game.components.hero.tile.width,
                 tileh: Game.components.hero.tile.height,

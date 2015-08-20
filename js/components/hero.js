@@ -1,3 +1,7 @@
+/**
+ * @link http://heroes.thelazy.net/wiki/List_of_all_the_hero_specialties
+ * @link http://heroes.thelazy.net/wiki/Hero_specialty
+ */
 Crafty.c('hero', {
     flipDirection: [
         'sw',
@@ -52,6 +56,15 @@ Crafty.c('hero', {
      */
     setType: function(type) {
         this.type = type;
+        return this;
+    },
+
+    /**
+     * @param {String} name
+     * @returns {*}
+     */
+    setName: function(name) {
+        this.name = name;
         return this;
     },
 

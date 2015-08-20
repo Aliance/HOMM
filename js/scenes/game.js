@@ -239,10 +239,11 @@ Crafty.defineScene('Game', function() {
     Game.locateItem('mercury', 10, 3);
 
     var townType = Crafty.math.randomElementOfArray(Game.components.town.type);
-    Game.locateTown(townType, 12, 7);
+    var town = Game.locateTown(townType, 12, 7);
+    town.buildFort();
 
     var townType = Crafty.math.randomElementOfArray(Game.components.town.type);
-    Game.locateTown(townType, 4, 6);
+    var town = Game.locateTown(townType, 4, 6);
 
     Game.locateObject('obj1', 15, 7);
 

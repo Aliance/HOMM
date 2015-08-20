@@ -10,7 +10,7 @@ Crafty.c('town', {
 
         this._wasBuiltToday = false;
 
-        this.buildings = [];
+        this.buildings = new TownBuildings(this);
 
         this.creatures = [];
 
@@ -129,33 +129,33 @@ Crafty.c('town', {
         return this._wasBuiltToday;
     },
 
-    hasFort: function() {
-        return Crafty.math.randomInt(0, 1);
-        //return this.buildings;
-    },
-
-    hasCitadel: function() {
-        return Crafty.math.randomInt(0, 1);
-        //return this.buildings;
-    },
-
-    hasCastle: function() {
-        return Crafty.math.randomInt(0, 1);
-        //return this.buildings;
-    },
-
     hasTownHall: function() {
-        return Crafty.math.randomInt(0, 1);
-        //return this.buildings;
+        return this.buildings.hasTownHall();
     },
 
     hasCityHall: function() {
-        return Crafty.math.randomInt(0, 1);
-        //return this.buildings;
+        return this.buildings.hasCityHall();
     },
 
     hasCapitol: function() {
-        return Crafty.math.randomInt(0, 1);
-        //return this.buildings;
+        return this.buildings.hasCapitol();
+    },
+
+    hasFort: function() {
+        return this.buildings.hasFort();
+    },
+
+    hasCitadel: function() {
+        return this.buildings.hasCitadel();
+    },
+
+    hasCastle: function() {
+        return this.buildings.hasCastle();
+    },
+
+    buildFort: function() {
+        this.removeComponent(this.type + '-village');
+        this.buildings.buildFort();
+        this.addComponent(this.type);
     }
 });

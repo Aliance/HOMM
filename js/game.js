@@ -217,6 +217,16 @@ var Game = {
                 Game.components.resource.animation['gold']    = createAnimationMap(0, 7, 7);
             }
         },
+        heroPortraitBig: {
+            tile: {
+                width:  58,
+                height: 64
+            },
+            map: {
+                'gelly'        : [4, 18],
+                'mutare-drake' : [0, 20]
+            }
+        },
         hero: {
             tile: {
                 width:  96,
@@ -543,11 +553,11 @@ var Game = {
 
         var town = this.locateEntity('town', x, y);
 
-        town.setTitle('Название города')
-            .setType(type)
-        ;
+        town.setTitle('Название города').setType(type);
 
         Game.towns.push(town);
+
+        return town;
     },
 
     locateMine: function(entity, x, y) {
@@ -585,7 +595,7 @@ var Game = {
 
         console.log('hero: %s', entity);
 
-        var hero = this.locateEntity('hero', x, y).setType(entity).stand('e');
+        var hero = this.locateEntity('hero', x, y).setType(entity).setName('mutare-drake').stand('e');
 
         Game.heroes.push(hero);
         Game.activeHero = hero;
