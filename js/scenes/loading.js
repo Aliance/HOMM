@@ -8,6 +8,10 @@ Crafty.defineScene('Loading', function() {
     Crafty.background('#ccc');
 
     var assets = {
+        //'audio': {'test': 'test.wav'},
+        'images': [
+            './images/interface/town/footer.png'
+        ],
         'sprites': {
             /* TERRAIN */
             './images/landscape/dirt.png': {
@@ -117,6 +121,26 @@ Crafty.defineScene('Loading', function() {
                 tile: Game.components.town.tile.width,
                 tileh: Game.components.town.tile.height,
                 map: Game.components.town.map
+            },
+            './images/interface/town/background.png': {
+                tile: Game.components.townBackground.tile.width,
+                tileh: Game.components.townBackground.tile.height,
+                map: Game.components.townBackground.map
+            },
+            './images/interface/town/icon.png': {
+                tile: Game.components.townIcon.tile.width,
+                tileh: Game.components.townIcon.tile.height,
+                map: Game.components.townIcon.map
+            },
+            './images/interface/town/choose.png': {
+                tile: Game.components.townChoose.tile.width,
+                tileh: Game.components.townChoose.tile.height,
+                map: Game.components.townChoose.map
+            },
+            './images/interface/town/building-icon.png': {
+                tile: Game.components.townBuildingIcon.tile.width,
+                tileh: Game.components.townBuildingIcon.tile.height,
+                map: Game.components.townBuildingIcon.map
             },
             /* HEROES */
             './images/heroes/alchemist.png': {

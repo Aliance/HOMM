@@ -327,6 +327,130 @@ var Game = {
                 'conflux-capital'   : [2, 8]
             }
         },
+        townBackground: {
+            tile: {
+                width:  800,
+                height: 374
+            },
+            map: {
+                'town--background--castle'    : [0, 0],
+                'town--background--rampart'   : [0, 1],
+                'town--background--tower'     : [0, 2],
+                'town--background--inferno'   : [0, 3],
+                'town--background--necropolis': [0, 4],
+                'town--background--dungeon'   : [0, 5],
+                'town--background--stronghold': [0, 6],
+                'town--background--fortress'  : [0, 7],
+                'town--background--conflux'   : [0, 8]
+            }
+        },
+        townIcon: {
+            tile: {
+                width:  58,
+                height: 64
+            },
+            map: {
+                'town--icon--castle'    : [0, 0],
+                'town--icon--rampart'   : [0, 1],
+                'town--icon--tower'     : [0, 2],
+                'town--icon--inferno'   : [0, 3],
+                'town--icon--necropolis': [0, 4],
+                'town--icon--dungeon'   : [0, 5],
+                'town--icon--stronghold': [0, 6],
+                'town--icon--fortress'  : [0, 7],
+                'town--icon--conflux'   : [0, 8],
+                'town--icon--built--castle'    : [1, 0],
+                'town--icon--built--rampart'   : [1, 1],
+                'town--icon--built--tower'     : [1, 2],
+                'town--icon--built--inferno'   : [1, 3],
+                'town--icon--built--necropolis': [1, 4],
+                'town--icon--built--dungeon'   : [1, 5],
+                'town--icon--built--stronghold': [1, 6],
+                'town--icon--built--fortress'  : [1, 7],
+                'town--icon--built--conflux'   : [1, 8],
+                'town--icon--village--castle'    : [2, 0],
+                'town--icon--village--rampart'   : [2, 1],
+                'town--icon--village--tower'     : [2, 2],
+                'town--icon--village--inferno'   : [2, 3],
+                'town--icon--village--necropolis': [2, 4],
+                'town--icon--village--dungeon'   : [2, 5],
+                'town--icon--village--stronghold': [2, 6],
+                'town--icon--village--fortress'  : [2, 7],
+                'town--icon--village--conflux'   : [2, 8],
+                'town--icon--village--built--castle'    : [3, 0],
+                'town--icon--village--built--rampart'   : [3, 1],
+                'town--icon--village--built--tower'     : [3, 2],
+                'town--icon--village--built--inferno'   : [3, 3],
+                'town--icon--village--built--necropolis': [3, 4],
+                'town--icon--village--built--dungeon'   : [3, 5],
+                'town--icon--village--built--stronghold': [3, 6],
+                'town--icon--village--built--fortress'  : [3, 7],
+                'town--icon--village--built--conflux'   : [3, 8]
+            }
+        },
+        townChoose: {
+            tile: {
+                width:  48,
+                height: 32
+            },
+            map: {
+                'town--choose--castle'    : [0, 0],
+                'town--choose--rampart'   : [0, 1],
+                'town--choose--tower'     : [0, 2],
+                'town--choose--inferno'   : [0, 3],
+                'town--choose--necropolis': [0, 4],
+                'town--choose--dungeon'   : [0, 5],
+                'town--choose--stronghold': [0, 6],
+                'town--choose--fortress'  : [0, 7],
+                'town--choose--conflux'   : [0, 8],
+                'town--choose--built--castle'    : [1, 0],
+                'town--choose--built--rampart'   : [1, 1],
+                'town--choose--built--tower'     : [1, 2],
+                'town--choose--built--inferno'   : [1, 3],
+                'town--choose--built--necropolis': [1, 4],
+                'town--choose--built--dungeon'   : [1, 5],
+                'town--choose--built--stronghold': [1, 6],
+                'town--choose--built--fortress'  : [1, 7],
+                'town--choose--built--conflux'   : [1, 8],
+                'town--choose--village--castle'    : [2, 0],
+                'town--choose--village--rampart'   : [2, 1],
+                'town--choose--village--tower'     : [2, 2],
+                'town--choose--village--inferno'   : [2, 3],
+                'town--choose--village--necropolis': [2, 4],
+                'town--choose--village--dungeon'   : [2, 5],
+                'town--choose--village--stronghold': [2, 6],
+                'town--choose--village--fortress'  : [2, 7],
+                'town--choose--village--conflux'   : [2, 8],
+                'town--choose--village--built--castle'    : [3, 0],
+                'town--choose--village--built--rampart'   : [3, 1],
+                'town--choose--village--built--tower'     : [3, 2],
+                'town--choose--village--built--inferno'   : [3, 3],
+                'town--choose--village--built--necropolis': [3, 4],
+                'town--choose--village--built--dungeon'   : [3, 5],
+                'town--choose--village--built--stronghold': [3, 6],
+                'town--choose--village--built--fortress'  : [3, 7],
+                'town--choose--village--built--conflux'   : [3, 8],
+                'town--choose--none'      : [0, 9],
+                'town--choose--random'    : [1, 9],
+                'town--choose--highlight' : [2, 9]
+            }
+        },
+        townBuildingIcon: {
+            tile: {
+                width:  38,
+                height: 38
+            },
+            map: {
+                'town--building--icon--fort'         : [0, 0],
+                'town--building--icon--citadel'      : [1, 0],
+                'town--building--icon--castle'       : [2, 0],
+                'town--building--icon--none'         : [3, 0],
+                'town--building--icon--village-hall' : [0, 1],
+                'town--building--icon--town-hall'    : [1, 1],
+                'town--building--icon--city-hall'    : [2, 1],
+                'town--building--icon--capitol'      : [3, 1]
+            }
+        },
         creatures: {
             tile: {
                 width:  40,
@@ -367,11 +491,11 @@ var Game = {
     },
 
     width: function() {
-        return this.grid.cols * this.grid.tileSize;
+        return 800;//this.grid.cols * this.grid.tileSize;
     },
 
     height: function() {
-        return this.grid.rows * this.grid.tileSize;
+        return 600;//this.grid.rows * this.grid.tileSize;
     },
 
     start: function() {
@@ -397,11 +521,9 @@ var Game = {
         entity.addComponent('SpriteAnimation')
               .reel('motion', Game.components.creatures.animationDuration, Game.components.creatures.animation['motion--' + entityType])
               .animate('motion', -1);
-
-        return entity;
     },
 
-    locateTown: function(entity, x, y) {
+    locateTown: function(type, x, y) {
         Game.markTileUnwalkable(x-1, y-2);
         Game.markTileUnwalkable(x,   y-2);
         Game.markTileUnwalkable(x+1, y-2);
@@ -417,9 +539,15 @@ var Game = {
         Game.markTileUnwalkable(x+1, y);
         Game.markTileUnwalkable(x+2, y);
 
-        console.log('town: %s', entity);
+        console.log('town: %s', type);
 
-        return this.locateEntity('town', x, y).addComponent(entity);
+        var town = this.locateEntity('town', x, y);
+
+        town.setTitle('Название города')
+            .setType(type)
+        ;
+
+        Game.towns.push(town);
     },
 
     locateMine: function(entity, x, y) {
@@ -427,7 +555,7 @@ var Game = {
 
         console.log('mine: %s', entity);
 
-        return this.locateEntity('mine', x, y).addComponent('mine--' + entity);
+        this.locateEntity('mine', x, y).addComponent('mine--' + entity);
     },
 
     locateRoad: function(entity, x, y) {
@@ -448,7 +576,7 @@ var Game = {
 
         console.log('object: %s', entity);
 
-        return this.locateEntity('object', x, y).addComponent(entity);
+        this.locateEntity('object', x, y).addComponent(entity);
     },
 
     locateHero: function(entity, x, y) {
@@ -457,14 +585,18 @@ var Game = {
 
         console.log('hero: %s', entity);
 
-        return this.locateEntity('hero', x, y).setType(entity).stand('e');
+        var hero = this.locateEntity('hero', x, y).setType(entity).stand('e');
+
+        Game.heroes.push(hero);
+        Game.activeHero = hero;
+        //Crafty.viewport.centerOn(hero, 1000);
     },
 
     locateItem: function(entity, x, y) {
         Game.grid.matrix[y][x] = CONST_NOT_WALKABLE;
         Game.grid.objectMatrix[y][x] = CONST_TEMPORARY_NOT_WALKABLE;
 
-        return this.locateEntity(entity, x, y);
+        this.locateEntity(entity, x, y);
     },
 
     locateLandscape: function(entity, x, y, angle) {

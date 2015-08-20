@@ -44,9 +44,10 @@
     <script src="js/components/object.js"></script>
     <script src="js/components/mine.js"></script>
     <script src="js/components/hero.js"></script>
+    <script src="js/scenes/loading.js"></script>
     <script src="js/scenes/error.js"></script>
     <script src="js/scenes/game.js"></script>
-    <script src="js/scenes/loading.js"></script>
+    <script src="js/scenes/town.js"></script>
     <script src="js/game.js"></script>
     <script>
         var mapData = {
@@ -68,15 +69,12 @@
                     [CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER, CONST_LANDSCAPE_TILE_WATER]
                 ],
                 roads: {
-                    3 : {
+                    4 : {
                         5 : CONST_ROAD_TILE_VERTICAL_END | CONST_ROAD_TYPE_COBBLESTONE,
                         6 : CONST_ROAD_TILE_VERTICAL | CONST_ROAD_TYPE_COBBLESTONE,
                         7 : CONST_ROAD_TILE_VERTICAL | CONST_ROAD_TYPE_COBBLESTONE,
                         8 : CONST_ROAD_TILE_VERTICAL | CONST_ROAD_TYPE_COBBLESTONE,
                         9 : CONST_ROAD_TILE_DIAGONAL | CONST_ROAD_TYPE_COBBLESTONE | CONST_ROAD_FLIP_Y
-                    },
-                    4 : {
-                        9 : CONST_ROAD_TILE_HORIZONTAL | CONST_ROAD_TYPE_COBBLESTONE
                     },
                     5 : {
                         9: CONST_ROAD_TILE_DIAGONAL | CONST_ROAD_TYPE_COBBLESTONE | CONST_ROAD_FLIP_X,
