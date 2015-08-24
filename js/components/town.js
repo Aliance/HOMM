@@ -1,3 +1,18 @@
+var
+    CONST_TOWN_TYPE_CASTLE     = 1 << 0, // castle
+    CONST_TOWN_TYPE_RAMPART    = 1 << 1, // rampart
+    CONST_TOWN_TYPE_TOWER      = 1 << 2, // tower
+    CONST_TOWN_TYPE_INFERNO    = 1 << 3, // inferno
+    CONST_TOWN_TYPE_NECROPOLIS = 1 << 4, // necropolis
+    CONST_TOWN_TYPE_DUNGEON    = 1 << 5, // dungeon
+    CONST_TOWN_TYPE_STRONGHOLD = 1 << 6, // stronghold
+    CONST_TOWN_TYPE_FORTRESS   = 1 << 7, // fortress
+    CONST_TOWN_TYPE_CONFLUX    = 1 << 8, // conflux
+
+    CONST_TOWN_BUILDINGS_FORT    = 1 << 9,
+    CONST_TOWN_BUILDINGS_CAPITOL = 1 << 10
+    ;
+
 Crafty.c('town', {
     init: function() {
         this.collisionMarginLeft = 96;
@@ -157,5 +172,11 @@ Crafty.c('town', {
         this.removeComponent(this.type + '-village');
         this.buildings.buildFort();
         this.addComponent(this.type);
+    },
+
+    buildCapitol: function() {
+        this.removeComponent(this.type);
+        this.buildings.buildCapitol();
+        this.addComponent(this.type + '-capital');
     }
 });

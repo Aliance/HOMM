@@ -3,8 +3,18 @@ Crafty.defineScene('Town', function() {
     Crafty.e('2D, Canvas, Image')
         .image('./images/interface/town/footer.png')
         .attr({
+            z: 1,
             x: 0,
             y: 374
+        });
+
+    // ресурсы
+    Crafty.e('2D, DOM, Image')
+        .image('./images/interface/town/resources.png')
+        .attr({
+            z: 2,
+            x: 60,
+            y: 576
         });
 
     // задний фон
@@ -181,4 +191,19 @@ Crafty.defineScene('Town', function() {
                 });
         }
     }
+
+    // town viewer exit button
+    Crafty.e('2D, Canvas, Mouse')
+        .attr({
+            w: 48,
+            h: 28,
+            z: 2,
+            x: 744,
+            y: 545
+        })
+        .bind('Click', function(e) {
+            e.stopPropagation();
+            Game.activeTown = null;
+            Crafty.enterScene('Game');
+        });
 });

@@ -21,6 +21,7 @@ var CONST_LANDSCAPE_TILE_GRASS = 1,
 Crafty.c('landscape', {
     init: function() {
         this.requires('grid')
+            //.requires('Mouse')
             .attr({
                 w: Game.grid.tileSize,
                 h: Game.grid.tileSize,

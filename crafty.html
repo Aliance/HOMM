@@ -122,6 +122,14 @@
                         6 : CONST_RIVER_TYPE_DIRTY | CONST_RIVER_TILE_CORNER | CONST_RIVER_FLIP_X | CONST_RIVER_FLIP_Y
                     }
                 }
+            },
+            towns: {
+                4: {
+                    6 : CONST_TOWN_TYPE_RAMPART
+                },
+                12: {
+                    7 : CONST_TOWN_TYPE_CASTLE | CONST_TOWN_BUILDINGS_FORT
+                }
             }
         };
         window.addEventListener('load', Game.start);

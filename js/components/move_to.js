@@ -27,6 +27,10 @@ Crafty.c('MoveTo', {
             return;
         }
 
+        if (Game.activeTown) {
+            return;
+        }
+
         this.to = {
             x: Math.floor(e.realX / Game.grid.tileSize),
             y: Math.floor(e.realY / Game.grid.tileSize)

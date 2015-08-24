@@ -74,4 +74,8 @@ function TownBuildings(town) {
     this.buildFort = function() {
         this._constructBuilding(CONST_BUILDING_FORT);
     };
+
+    this.buildCapitol = function() {
+        this._constructBuilding(CONST_BUILDING_CAPITOL);
+    };
 }

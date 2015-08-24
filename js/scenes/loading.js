@@ -10,6 +10,7 @@ Crafty.defineScene('Loading', function() {
     var assets = {
         //'audio': {'test': 'test.wav'},
         'images': [
+            './images/interface/town/resources.png',
             './images/interface/town/footer.png'
         ],
         'sprites': {

@@ -130,8 +130,6 @@ Crafty.defineScene('Game', function() {
             Game.locateLandscape('landscape', x, y, angle).placeRandomTerrain(terrain, from, to, angle, flip);
 
             // RIVERS
-
-
             if (typeof mapData.landscape.rivers[x] !== 'undefined' && typeof mapData.landscape.rivers[x][y] !== 'undefined') {
                 var river = mapData.landscape.rivers[x][y],
                     riverType = null,
@@ -224,6 +222,46 @@ Crafty.defineScene('Game', function() {
 
                 Game.locateRoad(roadType, x, y).placeRandomTile(roadType, roadTile, roadFlip);
             }
+
+            // TOWNS
+            if (typeof mapData.towns[x] !== 'undefined' && typeof mapData.towns[x][y] !== 'undefined') {
+                var townData = mapData.towns[x][y],
+                    townType = null;
+
+                if (townData & CONST_TOWN_TYPE_CASTLE) {
+                    townType = 'castle';
+                } else if (townData & CONST_TOWN_TYPE_RAMPART) {
+                    townType = 'rampart';
+                } else if (townData & CONST_TOWN_TYPE_TOWER) {
+                    townType = 'tower';
+                } else if (townData & CONST_TOWN_TYPE_INFERNO) {
+                    townType = 'inferno';
+                } else if (townData & CONST_TOWN_TYPE_NECROPOLIS) {
+                    townType = 'necropolis';
+                } else if (townData & CONST_TOWN_TYPE_DUNGEON) {
+                    townType = 'dungeon';
+                } else if (townData & CONST_TOWN_TYPE_STRONGHOLD) {
+                    townType = 'stronghold';
+                } else if (townData & CONST_TOWN_TYPE_FORTRESS) {
+                    townType = 'fortress';
+                } else if (townData & CONST_TOWN_TYPE_CONFLUX) {
+                    townType = 'conflux';
+                } else {
+                    console.log('town type not found at %d, %d', x, y);
+                    Crafty.enterScene('Error');
+                    throw new Error('town error');
+                }
+
+                var town = Game.locateTown(townType, x, y);
+
+                if (townData & CONST_TOWN_BUILDINGS_FORT) {
+                    town.buildFort();
+
+                    if (townData & CONST_TOWN_BUILDINGS_CAPITOL) {
+                        town.buildCapitol();
+                    }
+                }
+            }
         }
     }
 
@@ -237,13 +275,6 @@ Crafty.defineScene('Game', function() {
     Game.locateItem('ore', 10, 2);
     Game.locateItem('wood', 10, 4);
     Game.locateItem('mercury', 10, 3);
-
-    var townType = Crafty.math.randomElementOfArray(Game.components.town.type);
-    var town = Game.locateTown(townType, 12, 7);
-    town.buildFort();
-
-    var townType = Crafty.math.randomElementOfArray(Game.components.town.type);
-    var town = Game.locateTown(townType, 4, 6);
 
     Game.locateObject('obj1', 15, 7);
 
