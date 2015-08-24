@@ -1,3 +1,24 @@
+var
+    CONST_HERO_TYPE_KNIGHT       = 1 << 0, // castle
+    CONST_HERO_TYPE_CLERIC       = 1 << 1, // castle
+    CONST_HERO_TYPE_RANGER       = 1 << 2, // rampart
+    CONST_HERO_TYPE_DRUID        = 1 << 3, // rampart
+    CONST_HERO_TYPE_ALCHEMIST    = 1 << 4, // tower
+    CONST_HERO_TYPE_WIZARD       = 1 << 5, // tower
+    CONST_HERO_TYPE_HERETIC      = 1 << 6, // inferno
+    CONST_HERO_TYPE_DEMONIAC     = 1 << 7, // inferno
+    CONST_HERO_TYPE_DEATH_KNIGHT = 1 << 8, // necropolis
+    CONST_HERO_TYPE_NECROMANCER  = 1 << 9, // necropolis
+    CONST_HERO_TYPE_OVERLORD     = 1 << 10, // dungeon
+    CONST_HERO_TYPE_WARLOCK      = 1 << 11, // dungeon
+    CONST_HERO_TYPE_BARBARIAN    = 1 << 12, // stronghold
+    CONST_HERO_TYPE_BATTLE_MAGE  = 1 << 13, // stronghold
+    CONST_HERO_TYPE_BEASTMASTER  = 1 << 14, // fortress
+    CONST_HERO_TYPE_WITCH        = 1 << 15, // fortress
+    CONST_HERO_TYPE_ELEMENTALIST = 1 << 16, // conflux
+    CONST_HERO_TYPE_PLANESWALKER = 1 << 17 // conflux
+    ;
+
 /**
  * @link http://heroes.thelazy.net/wiki/List_of_all_the_hero_specialties
  * @link http://heroes.thelazy.net/wiki/Hero_specialty

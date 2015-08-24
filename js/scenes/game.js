@@ -262,10 +262,40 @@ Crafty.defineScene('Game', function() {
                     }
                 }
             }
+
+            // HEROES
+            if (typeof mapData.heroes[x] !== 'undefined' && typeof mapData.heroes[x][y] !== 'undefined') {
+                var heroData = mapData.heroes[x][y],
+                    heroType = null;
+
+                if (heroData & CONST_TOWN_TYPE_CASTLE) {
+                    heroType = 'castle';
+                } else if (heroData & CONST_TOWN_TYPE_RAMPART) {
+                    heroType = 'rampart';
+                } else if (heroData & CONST_TOWN_TYPE_TOWER) {
+                    heroType = 'tower';
+                } else if (heroData & CONST_TOWN_TYPE_INFERNO) {
+                    heroType = 'inferno';
+                } else if (heroData & CONST_TOWN_TYPE_NECROPOLIS) {
+                    heroType = 'necropolis';
+                } else if (heroData & CONST_TOWN_TYPE_DUNGEON) {
+                    heroType = 'dungeon';
+                } else if (heroData & CONST_TOWN_TYPE_STRONGHOLD) {
+                    heroType = 'stronghold';
+                } else if (heroData & CONST_TOWN_TYPE_FORTRESS) {
+                    heroType = 'fortress';
+                } else if (heroData & CONST_TOWN_TYPE_CONFLUX) {
+                    heroType = 'conflux';
+                } else {
+                    console.log('hero type not found at %d, %d', x, y);
+                    Crafty.enterScene('Error');
+                    throw new Error('hero error');
+                }
+
+                Game.locateHero(heroType, x, y);
+            }
         }
     }
-
-    Game.locateHero(Crafty.math.randomElementOfArray(Game.components.hero.type), 12, 8);
 
     Game.locateItem('crystal', 11, 11);
     Game.locateItem('gold', 10, 11);
