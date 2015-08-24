@@ -268,24 +268,42 @@ Crafty.defineScene('Game', function() {
                 var heroData = mapData.heroes[x][y],
                     heroType = null;
 
-                if (heroData & CONST_TOWN_TYPE_CASTLE) {
-                    heroType = 'castle';
-                } else if (heroData & CONST_TOWN_TYPE_RAMPART) {
-                    heroType = 'rampart';
-                } else if (heroData & CONST_TOWN_TYPE_TOWER) {
-                    heroType = 'tower';
-                } else if (heroData & CONST_TOWN_TYPE_INFERNO) {
-                    heroType = 'inferno';
-                } else if (heroData & CONST_TOWN_TYPE_NECROPOLIS) {
-                    heroType = 'necropolis';
-                } else if (heroData & CONST_TOWN_TYPE_DUNGEON) {
-                    heroType = 'dungeon';
-                } else if (heroData & CONST_TOWN_TYPE_STRONGHOLD) {
-                    heroType = 'stronghold';
-                } else if (heroData & CONST_TOWN_TYPE_FORTRESS) {
-                    heroType = 'fortress';
-                } else if (heroData & CONST_TOWN_TYPE_CONFLUX) {
-                    heroType = 'conflux';
+                if (heroData & CONST_HERO_TYPE_KNIGHT) {
+                    heroType = 'knight';
+                } else if (heroData & CONST_HERO_TYPE_CLERIC) {
+                    heroType = 'cleric';
+                } else if (heroData & CONST_HERO_TYPE_RANGER) {
+                    heroType = 'ranger';
+                } else if (heroData & CONST_HERO_TYPE_DRUID) {
+                    heroType = 'druid';
+                } else if (heroData & CONST_HERO_TYPE_ALCHEMIST) {
+                    heroType = 'alchemist';
+                } else if (heroData & CONST_HERO_TYPE_WIZARD) {
+                    heroType = 'wizard';
+                } else if (heroData & CONST_HERO_TYPE_HERETIC) {
+                    heroType = 'heretic';
+                } else if (heroData & CONST_HERO_TYPE_DEMONIAC) {
+                    heroType = 'demoniac';
+                } else if (heroData & CONST_HERO_TYPE_DEATH_KNIGHT) {
+                    heroType = 'death-knight';
+                } else if (heroData & CONST_HERO_TYPE_NECROMANCER) {
+                    heroType = 'necromancer';
+                } else if (heroData & CONST_HERO_TYPE_OVERLORD) {
+                    heroType = 'overlord';
+                } else if (heroData & CONST_HERO_TYPE_WARLOCK) {
+                    heroType = 'warlock';
+                } else if (heroData & CONST_HERO_TYPE_BARBARIAN) {
+                    heroType = 'barbarian';
+                } else if (heroData & CONST_HERO_TYPE_BATTLE_MAGE) {
+                    heroType = 'battle_mage';
+                } else if (heroData & CONST_HERO_TYPE_BEASTMASTER) {
+                    heroType = 'beastmaster';
+                } else if (heroData & CONST_HERO_TYPE_WITCH) {
+                    heroType = 'witch';
+                } else if (heroData & CONST_HERO_TYPE_ELEMENTALIST) {
+                    heroType = 'elementalist';
+                } else if (heroData & CONST_HERO_TYPE_PLANESWALKER) {
+                    heroType = 'planeswalker';
                 } else {
                     console.log('hero type not found at %d, %d', x, y);
                     Crafty.enterScene('Error');
@@ -294,17 +312,38 @@ Crafty.defineScene('Game', function() {
 
                 Game.locateHero(heroType, x, y);
             }
+
+            // RESOURCES
+            if (typeof mapData.resources[x] !== 'undefined' && typeof mapData.resources[x][y] !== 'undefined') {
+                var resourceData = mapData.resources[x][y],
+                    resourceType = null;
+
+                if (resourceData & CONST_RESOURCE_TYPE_CHEST) {
+                    resourceType = 'chest';
+                } else if (resourceData & CONST_RESOURCE_TYPE_GOLD) {
+                    resourceType = 'gold';
+                } else if (resourceData & CONST_RESOURCE_TYPE_WOOD) {
+                    resourceType = 'wood';
+                } else if (resourceData & CONST_RESOURCE_TYPE_ORE) {
+                    resourceType = 'ore';
+                } else if (resourceData & CONST_RESOURCE_TYPE_GEM) {
+                    resourceType = 'gem';
+                } else if (resourceData & CONST_RESOURCE_TYPE_CRYSTAL) {
+                    resourceType = 'crystal';
+                } else if (resourceData & CONST_RESOURCE_TYPE_MERCURY) {
+                    resourceType = 'mercury';
+                } else if (resourceData & CONST_RESOURCE_TYPE_SULPHUR) {
+                    resourceType = 'sulphur';
+                } else {
+                    console.log('resource type not found at %d, %d', x, y);
+                    Crafty.enterScene('Error');
+                    throw new Error('resource error');
+                }
+
+                Game.locateItem(resourceType, x, y);
+            }
         }
     }
-
-    Game.locateItem('crystal', 11, 11);
-    Game.locateItem('gold', 10, 11);
-    Game.locateItem('gem', 10, 10);
-    Game.locateItem('chest', 9, 10);
-    Game.locateItem('sulphur', 10, 5);
-    Game.locateItem('ore', 10, 2);
-    Game.locateItem('wood', 10, 4);
-    Game.locateItem('mercury', 10, 3);
 
     Game.locateObject('obj1', 15, 7);
 
