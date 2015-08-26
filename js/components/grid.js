@@ -1,7 +1,7 @@
 Crafty.c('grid', {
     init: function(){
-        //this.requires('2D, Canvas');
-        this.requires('2D, DOM'); // DEBUG
+        this.requires('2D, Canvas');
+        //this.requires('2D, DOM'); // DEBUG
     },
 
     getPosition: function() {

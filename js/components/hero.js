@@ -19,6 +19,55 @@ var
     CONST_HERO_TYPE_PLANESWALKER = 1 << 17 // conflux
     ;
 
+var CONST_HERO_EDRIC         = 1,
+    CONST_HERO_LORD_HAART    = 2,
+    CONST_HERO_ORRIN         = 3,
+    CONST_HERO_SIR_CHRISTIAN = 4,
+    CONST_HERO_SORSHA        = 5,
+    CONST_HERO_SYLVIA        = 6,
+    CONST_HERO_TYRIS         = 7,
+    CONST_HERO_VALESKA       = 8,
+    CONST_HERO_ADELA         = 9,
+    CONST_HERO_ADELAIDE      = 10,
+    CONST_HERO_CAITLIN       = 11,
+    CONST_HERO_CUTHBERT      = 12,
+    CONST_HERO_INGHAM        = 13,
+    CONST_HERO_LOYNIS        = 14,
+    CONST_HERO_RION          = 15,
+    CONST_HERO_SANYA         = 16,
+    CONST_HERO_CLANCY        = 17,
+    CONST_HERO_IVOR          = 18,
+    CONST_HERO_JENOVA        = 19,
+    CONST_HERO_KYRRE         = 20,
+    CONST_HERO_MEPHALA       = 21,
+    CONST_HERO_RYLAND        = 22,
+    CONST_HERO_THORGRIM      = 23,
+    CONST_HERO_UFRETIN       = 24,
+    CONST_HERO_AERIS         = 25,
+    CONST_HERO_ALAGAR        = 26,
+    CONST_HERO_CORONIUS      = 27,
+    CONST_HERO_ELLESHAR      = 28,
+    CONST_HERO_GEM           = 29,
+    CONST_HERO_MALCOM        = 30,
+    CONST_HERO_MELODIA       = 31,
+    CONST_HERO_ULAND         = 32,
+    CONST_HERO_FAFNER        = 33,
+    CONST_HERO_IONA          = 34,
+    CONST_HERO_JOSEPHINE     = 35,
+    CONST_HERO_NEELA         = 36,
+    CONST_HERO_PIQUEDRAM     = 37,
+    CONST_HERO_RISSA         = 38,
+    CONST_HERO_THANE         = 39,
+    CONST_HERO_TOROSAR       = 40,
+    CONST_HERO_AINE          = 41,
+    CONST_HERO_ASTRAL        = 42,
+    CONST_HERO_CYRA          = 43,
+    CONST_HERO_DAREMYTH      = 44,
+    CONST_HERO_HALON         = 45,
+    CONST_HERO_SERENA        = 46,
+    CONST_HERO_SOLMYR        = 47,
+    CONST_HERO_THEODORUS     = 48,
+    CONST_HERO_              = 49;
 /**
  * @link http://heroes.thelazy.net/wiki/List_of_all_the_hero_specialties
  * @link http://heroes.thelazy.net/wiki/Hero_specialty
@@ -237,7 +286,9 @@ Crafty.c('hero', {
     _move: function(tile) {
         Crafty('movement').get(0).destroy();
 
-        var oldPosition = this.getTile();
+        var oldPosition = this.getTile(),
+            newPosition = this.getTile()
+            ;
 
         var t = this;
         var direction = '';
@@ -247,20 +298,32 @@ Crafty.c('hero', {
         if (tile[1] > oldPosition.y) {
             direction += 's';
             tween.y = this.y + movement;
+            newPosition.y += 1;
         } else if (tile[1] < oldPosition.y) {
             direction += 'n';
             tween.y = this.y - movement;
+            newPosition.y -= 1;
         }
 
         if (tile[0] > oldPosition.x) {
             direction += 'e';
             tween.x = this.x + movement;
+            newPosition.x += 1;
         } else if (tile[0] < oldPosition.x) {
             direction += 'w';
             tween.x = this.x - movement;
+            newPosition.x -= 1;
         }
 
         console.log('moving: ' + direction);
+
+        Game.grid.matrix[oldPosition.y][oldPosition.x] = CONST_WALKABLE;
+        Game.grid.objectMatrix[oldPosition.y][oldPosition.x] = CONST_WALKABLE;
+        Game.grid.matrix[newPosition.y][newPosition.x] = CONST_NOT_WALKABLE;
+        Game.grid.objectMatrix[newPosition.y][newPosition.x] = CONST_TEMPORARY_NOT_WALKABLE;
+
+        mapData.heroes[newPosition.x][newPosition.y] = mapData.heroes[oldPosition.x][oldPosition.y];
+        delete mapData.heroes[oldPosition.x][oldPosition.y];
 
         this.stand(direction)
             .animate('walk_'+ direction)

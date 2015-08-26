@@ -1,6 +1,8 @@
-var CONST_WALKABLE = 0;
-var CONST_NOT_WALKABLE = 1;
-var CONST_TEMPORARY_NOT_WALKABLE = 2;
+var
+    CONST_WALKABLE               = 0,
+    CONST_NOT_WALKABLE           = 1,
+    CONST_TEMPORARY_NOT_WALKABLE = 2
+    ;
 
 var createComponentMap = function(prefix, to, _y) {
     var map = {};
@@ -14,9 +16,13 @@ var createComponentMap = function(prefix, to, _y) {
 };
 
 var extend = function() {
-    var ret = {};
-    var len = arguments.length;
-    for (var i = 0; i < len; i++) {
+    var
+        ret = {},
+        i = 0,
+        len = arguments.length
+        ;
+
+    for (; i < len; i++) {
         for (var p in arguments[i]) if (arguments[i].hasOwnProperty(p)) {
             ret[p] = arguments[i][p];
         }
@@ -86,11 +92,6 @@ var Game = {
             map: createComponentMap('water', 33)
         },
         road: {
-            type: [
-                'cobblestone',
-                'gravel',
-                'dirt'
-            ],
             map: extend(
                 createComponentMap('road--cobblestone', 17, 0),
                 createComponentMap('road--gravel', 17, 1),
@@ -98,11 +99,6 @@ var Game = {
             )
         },
         river: {
-            type: [
-                'icy',
-                'lava',
-                'dirty'
-            ],
             map: extend(
                 createComponentMap('river--icy', 13, 0),
                 createComponentMap('river--lava', 13, 1),
@@ -223,8 +219,171 @@ var Game = {
                 height: 64
             },
             map: {
-                'gelly'        : [4, 18],
-                'mutare-drake' : [0, 20]
+                'orrin'         : [0, 0],
+                'valeska'       : [1, 0],
+                'edric'         : [2, 0],
+                'sylvia'        : [3, 0],
+                'lord-haart'    : [4, 0],
+                'sorsha'        : [5, 0],
+                'sir-christian' : [6, 0],
+                'tyris'         : [7, 0],
+                'rion'     : [0, 1],
+                'adela'    : [1, 1],
+                'cuthbert' : [2, 1],
+                'adelaide' : [3, 1],
+                'ingham'   : [4, 1],
+                'sanya'    : [5, 1],
+                'loynis'   : [6, 1],
+                'caitlin'  : [7, 1],
+                'mephala'  : [0, 2],
+                'ufretin'  : [1, 2],
+                'jenova'   : [2, 2],
+                'ryland'   : [3, 2],
+                'thorgrim' : [4, 2],
+                'ivor'     : [5, 2],
+                'clancy'   : [6, 2],
+                'kyrre'    : [7, 2],
+                'coronius' : [0, 3],
+                'uland'    : [1, 3],
+                'elleshar' : [2, 3],
+              //'gem'      : [3, 3], TODO: rename resource gem
+                'malcom'   : [4, 3],
+                'melodia'  : [5, 3],
+                'alagar'   : [6, 3],
+                'aeris'    : [7, 3],
+                'piquedram' : [0, 4],
+                'thane'     : [1, 4],
+                'josephine' : [2, 4],
+                'neela'     : [3, 4],
+                'torosar'   : [4, 4],
+                'fafner'    : [5, 4],
+                'rissa'     : [6, 4],
+                'iona'      : [7, 4],
+                'astral'    : [0, 5],
+                'halon'     : [1, 5],
+                'serena'    : [2, 5],
+                'daremyth'  : [3, 5],
+                'theodorus' : [4, 5],
+                'solmyr'    : [5, 5],
+                'cyra'      : [6, 5],
+                'aine'      : [7, 5],
+                'fiona'    : [0, 6],
+                'rashka'   : [1, 6],
+                'marius'   : [2, 6],
+                'ignatius' : [3, 6],
+                'octavia'  : [4, 6],
+                'calh'     : [5, 6],
+                'pyre'     : [6, 6],
+                'nymus'    : [7, 6],
+                'ayden'  : [0, 7],
+                'xyron'  : [1, 7],
+                'axsis'  : [2, 7],
+                'olema'  : [3, 7],
+                'calid'  : [4, 7],
+                'ash'    : [5, 7],
+                'zydar'  : [6, 7],
+                'xarfax' : [7, 7],
+                'straker'  : [0, 8],
+                'vokial'   : [1, 8],
+                'moandor'  : [2, 8],
+                'charna'   : [3, 8],
+                'tamika'   : [4, 8],
+                'isra'     : [5, 8],
+                'clavius'  : [6, 8],
+                'galthran' : [7, 8],
+                'septienna' : [0, 9],
+                'aislinn'   : [1, 9],
+                'sandro'    : [2, 9],
+                'nimbus'    : [3, 9],
+                'thant'     : [4, 9],
+                'xsi'       : [5, 9],
+                'vidomina'  : [6, 9],
+                'nagash'    : [7, 9],
+                'lorelei' : [0, 10],
+                'arlach'  : [1, 10],
+                'dace'    : [2, 10],
+                'ajit'    : [3, 10],
+                'damacon' : [4, 10],
+                'gunnar'  : [5, 10],
+                'synca'   : [6, 10],
+                'shakti'  : [7, 10],
+                'alamar'     : [0, 11],
+                'jaegar'     : [1, 11],
+                'malekith'   : [2, 11],
+                'jeddite'    : [3, 11],
+                'geon'       : [4, 11],
+                'deemer'     : [5, 11],
+                'sephinroth' : [6, 11],
+                'darkstorn'  : [7, 11],
+                'yog'       : [0, 12],
+                'gurnisson' : [1, 12],
+                'jabarkas'  : [2, 12],
+                'shiva'     : [3, 12],
+                'gretchin'  : [4, 12],
+                'krellion'  : [5, 12],
+                'crag-hack' : [6, 12],
+                'tyraxor'   : [7, 12],
+                'gird'    : [0, 13],
+                'vey'     : [1, 13],
+                'dessa'   : [2, 13],
+                'terek'   : [3, 13],
+                'zubin'   : [4, 13],
+                'gundula' : [5, 13],
+                'oris'    : [6, 13],
+                'saurug'  : [7, 13],
+                'bron'     : [0, 14],
+                'drakon'   : [1, 14],
+                'wystan'   : [2, 14],
+                'tazar'    : [3, 14],
+                'alkin'    : [4, 14],
+                'korbac'   : [5, 14],
+                'gerwulf'  : [6, 14],
+                'broghild' : [7, 14],
+                'mirlanda' : [0, 15],
+                'rosic'    : [1, 15],
+                'voy'      : [2, 15],
+                'verdish'  : [3, 15],
+                'merist'   : [4, 15],
+                'styg'     : [5, 15],
+                'andra'    : [6, 15],
+                'tiva'     : [7, 15],
+                'luna'    : [0, 16],
+                'brissa'  : [1, 16],
+                'ciele'   : [2, 16],
+                'labetha' : [3, 16],
+                'inteus'  : [4, 16],
+                'aenain'  : [5, 16],
+                'gelare'  : [6, 16],
+                'grindan' : [7, 16],
+                'pasis'   : [0, 17],
+                'thunar'  : [1, 17],
+                'ignissa' : [2, 17],
+                'lacus'   : [3, 17],
+                'monere'  : [4, 17],
+                'erdamon' : [5, 17],
+                'fiur'    : [6, 17],
+                'kalt'    : [7, 17]
+                /*
+                'adrienne'      : [0, 18], // witch
+                'boragus'       : [1, 18], // barbarian
+                'sir-christian' : [2, 18],
+                'dracon'        : [3, 18], // wizard
+                'gelu'          : [4, 18], // ranger
+                'kilgor'        : [5, 18], // barbarian
+                'lord-haart'    : [6, 18], // death knight
+                'mutare'        : [7, 18], // overlord
+                'queen-catherine-ironfist' : [0, 19], // knight
+                ''                         : [1, 19],
+                'xeron'                    : [2, 19], // demoniac
+                'ordwald'                  : [3, 19], // overlord
+                'finneas'                  : [4, 19], // necromancer
+                'gem'                      : [5, 19], // druid
+                'sandro'                   : [6, 19], // necromancer
+                'yog'                      : [7, 19], // wizard
+                'mutare-drake' : [0, 20], // overlord
+                ''             : [0, 20],
+                ''             : [1, 20]
+                */
             }
         },
         hero: {
@@ -235,26 +394,6 @@ var Game = {
             movement: 32,
             moveDuration: 500,
             skinPrefix: 'hero_',
-            type: [
-                'alchemist',
-                'barbarian',
-                'battle-mage',
-                'beastmaster',
-                'cleric',
-                'death-knight',
-                'demoniac',
-                'druid',
-                'elementalist',
-                'heretic',
-                'knight',
-                'necromancer',
-                'overlord',
-                'planeswalker',
-                'ranger',
-                'warlock',
-                'witch',
-                'wizard'
-            ],
             animation: [],
             getMap: function(type) {
                 var positions = {};
@@ -296,17 +435,6 @@ var Game = {
                 width:  192,
                 height: 192
             },
-            type: [
-                'castle',
-                'rampart',
-                'tower',
-                'inferno',
-                'necropolis',
-                'dungeon',
-                'stronghold',
-                'fortress',
-                'conflux'
-            ],
             map: {
                 'castle-village'    : [0, 0],
                 'rampart-village'   : [0, 1],
@@ -467,7 +595,7 @@ var Game = {
                 height: 50
             },
             map: {
-                'lazure': [0, 0]
+                'azure-dragon': [0, 0]
             },
             animationDuration: 1500,
             animation: [],
@@ -486,7 +614,7 @@ var Game = {
                     return map;
                 };
 
-                Game.components.creatures.animation['motion--lazure']  = createAnimationMap(0, 5, 0);
+                Game.components.creatures.animation['motion--azure-dragon']  = createAnimationMap(0, 5, 0);
             }
         },
         object: {
@@ -513,8 +641,6 @@ var Game = {
 
         Crafty.init(Game.width(), Game.height(), $container.get(0));
         Crafty.viewport.clampToEntities = false;
-        //Crafty.viewport.bounds = {min:{x:0, y:0}, max:{x:320, y:320}};
-        //Crafty.viewport.init(320, 320);
 
         Crafty.enterScene('Loading');
     },
@@ -569,13 +695,13 @@ var Game = {
     },
 
     locateRoad: function(entity, x, y) {
-        console.log('road: %s', entity);
+        //console.log('road: %s', entity);
 
         return this.locateEntity('road', x, y);
     },
 
     locateRiver: function(entity, x, y) {
-        console.log('river: %s', entity);
+        //console.log('river: %s', entity);
 
         return this.locateEntity('river', x, y);
     },
@@ -584,34 +710,32 @@ var Game = {
         Game.markTileUnwalkable(x, y);
         Game.markTileUnwalkable(x + 1, y);
 
-        console.log('object: %s', entity);
+        //console.log('object: %s', entity);
 
         this.locateEntity('object', x, y).addComponent(entity);
     },
 
-    locateHero: function(entity, x, y) {
+    locateHero: function(skin, entity, x, y) {
         Game.grid.matrix[y][x] = CONST_NOT_WALKABLE;
         Game.grid.objectMatrix[y][x] = CONST_TEMPORARY_NOT_WALKABLE;
 
-        console.log('hero: %s', entity);
+        console.log('hero: %s %s', skin, entity);
 
-        var hero = this.locateEntity('hero', x, y).setType(entity).setName('mutare-drake').stand('e');
+        var hero = this.locateEntity('hero', x, y).setType(entity).setName(skin).stand('e');
 
         Game.heroes.push(hero);
         Game.activeHero = hero;
-        //Crafty.viewport.centerOn(hero, 1000);
+        Crafty.viewport.follow(hero, 0, 0);
     },
 
     locateItem: function(entity, x, y) {
-        Game.grid.matrix[y][x] = CONST_NOT_WALKABLE;
-        Game.grid.objectMatrix[y][x] = CONST_TEMPORARY_NOT_WALKABLE;
+        this.markTileTemporaryUnwalkable(x, y);
 
         this.locateEntity(entity, x, y);
     },
 
     locateLandscape: function(entity, x, y, angle) {
-        Game.grid.matrix[y][x] = CONST_WALKABLE;
-        Game.grid.objectMatrix[y][x] = CONST_WALKABLE;
+        this.markTileWalkable(x, y);
 
         return this.locateEntity(entity, x, y, angle);
     },
@@ -633,6 +757,15 @@ var Game = {
         }
 
         return Crafty.e(entity).at(x, y);
+    },
+
+    markTileWalkable: function(x, y) {
+        if (Game.grid.matrix[y][x] !== null) {
+            return;
+        }
+
+        Game.grid.matrix[y][x] = CONST_WALKABLE;
+        Game.grid.objectMatrix[y][x] = CONST_WALKABLE;
     },
 
     markTileUnwalkable: function(x, y) {

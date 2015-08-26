@@ -6,7 +6,6 @@
 }
 
 #container {
-    position: relative;
     display: inline-block;
     cursor: url('../images/cursors/arrow.png'), default;
 }

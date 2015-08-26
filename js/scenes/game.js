@@ -1,11 +1,25 @@
 Crafty.defineScene('Game', function() {
+    $container.empty();
+
+    Crafty.viewport.init(Game.grid.tileSize * 17, Game.grid.tileSize * 17, $container.get(0));
+    Crafty.canvas.init(Game.width(), Game.height());
+
+    Crafty.background('#000');
+
+    Game.towns = [];
+    Game.activeTown = null;
+    Game.heroes = [];
+    Game.activeHero = null;
+
     Game.grid.matrix = new Array(Game.grid.rows);
     Game.grid.objectMatrix = new Array(Game.grid.rows);
 
     for (var y = 0; y < Game.grid.rows; y++) {
         Game.grid.matrix[y] = new Array(Game.grid.cols);
         Game.grid.objectMatrix[y] = new Array(Game.grid.cols);
+    }
 
+    for (var y = 0; y < Game.grid.rows; y++) {
         for (var x = 0; x < Game.grid.cols; x++) {
             var terrain, from, to, angle = 0, flip = null;
 
@@ -223,6 +237,11 @@ Crafty.defineScene('Game', function() {
                 Game.locateRoad(roadType, x, y).placeRandomTile(roadType, roadTile, roadFlip);
             }
 
+            // OBJECTS
+            if (typeof mapData.landscape.objects[x] !== 'undefined' && typeof mapData.landscape.objects[x][y] !== 'undefined') {
+                Game.locateObject(mapData.landscape.objects[x][y], x, y);
+            }
+
             // TOWNS
             if (typeof mapData.towns[x] !== 'undefined' && typeof mapData.towns[x][y] !== 'undefined') {
                 var townData = mapData.towns[x][y],
@@ -266,11 +285,13 @@ Crafty.defineScene('Game', function() {
             // HEROES
             if (typeof mapData.heroes[x] !== 'undefined' && typeof mapData.heroes[x][y] !== 'undefined') {
                 var heroData = mapData.heroes[x][y],
+                    heroSkin = null,
                     heroType = null;
 
-                if (heroData & CONST_HERO_TYPE_KNIGHT) {
+                if (heroData & CONST_HERO_VALESKA) {
+                    heroSkin = 'valeska';
                     heroType = 'knight';
-                } else if (heroData & CONST_HERO_TYPE_CLERIC) {
+                }/* else if (heroData & CONST_HERO_TYPE_CLERIC) {
                     heroType = 'cleric';
                 } else if (heroData & CONST_HERO_TYPE_RANGER) {
                     heroType = 'ranger';
@@ -304,13 +325,13 @@ Crafty.defineScene('Game', function() {
                     heroType = 'elementalist';
                 } else if (heroData & CONST_HERO_TYPE_PLANESWALKER) {
                     heroType = 'planeswalker';
-                } else {
+                }*/ else {
                     console.log('hero type not found at %d, %d', x, y);
                     Crafty.enterScene('Error');
                     throw new Error('hero error');
                 }
 
-                Game.locateHero(heroType, x, y);
+                Game.locateHero(heroSkin, heroType, x, y);
             }
 
             // RESOURCES
@@ -342,12 +363,26 @@ Crafty.defineScene('Game', function() {
 
                 Game.locateItem(resourceType, x, y);
             }
+
+            // CREATURES
+            if (typeof mapData.creatures[x] !== 'undefined' && typeof mapData.creatures[x][y] !== 'undefined') {
+                var creatureData = mapData.creatures[x][y],
+                    creatureType = null;
+
+                if (creatureData & CONST_CREATURE_SPECIAL_AZURE_DRAGON) {
+                    creatureType = 'azure-dragon';
+                }/* else if (creatureData & CONST_CREATURE_SPECIAL_AZURE_DRAGON) {
+                    creatureType = '';
+                }*/ else {
+                    console.log('creature type not found at %d, %d', x, y);
+                    Crafty.enterScene('Error');
+                    throw new Error('creature error');
+                }
+
+                Game.locateCreature(creatureType, x, y);
+            }
         }
     }
 
-    Game.locateObject('obj1', 15, 7);
-
     //Game.locateMine(Crafty.math.randomElementOfArray(Game.components.mine.type), 8, 3);
-
-    Game.locateCreature('lazure', 6, 8);
 });

@@ -1,4 +1,10 @@
 Crafty.defineScene('Town', function() {
+    $container.empty();
+
+    Crafty.viewport.pan(Crafty.viewport.x, Crafty.viewport.y, 10);
+    Crafty.viewport.init(Game.width(), Game.height(), $container.get(0));
+    Crafty.canvas.init(Game.width(), Game.height());
+
     // нижняя плашка
     Crafty.e('2D, Canvas, Image')
         .image('./images/interface/town/footer.png')
@@ -9,7 +15,7 @@ Crafty.defineScene('Town', function() {
         });
 
     // ресурсы
-    Crafty.e('2D, DOM, Image')
+    Crafty.e('2D, Canvas, Image')
         .image('./images/interface/town/resources.png')
         .attr({
             z: 2,
@@ -140,13 +146,16 @@ Crafty.defineScene('Town', function() {
 
     // Портрет героя-охранника
     Crafty.e('2D, Canvas, Mouse')
-        .addComponent('gelly')
+        .addComponent('lord-haart')
         .attr({
             z: 3,
             x: 241,
             y: 388
         })
-        .bind('Click', function(e) { e.stopPropagation(); alert('guard-hero clicked') });
+        .bind('Click', function(e) {
+            e.stopPropagation();
+            alert('guard-hero clicked');
+        });
 
     // Портрет героя-посетителя
     Crafty.e('2D, Canvas, Mouse')
@@ -156,7 +165,10 @@ Crafty.defineScene('Town', function() {
             x: 241,
             y: 483
         })
-        .bind('Click', function(e) { e.stopPropagation(); alert('visitor-hero clicked') });
+        .bind('Click', function(e) {
+            e.stopPropagation();
+            alert('you clicked on ' + Game.activeHero.name);
+        });
 
     // значки выбора городов справа
     for (var i = 0, l = Game.towns.length; i < l; i++) {
