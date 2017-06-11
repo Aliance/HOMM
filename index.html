@@ -16,13 +16,41 @@
     <![endif]-->
 </head>
 <body class="unselectable">
-    <div id="container">
-        Подождите, идёт построение карты...
-    </div>
+    <div id="container">Loading...</div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/crafty.js"></script>
+    <script src="js/pathfinding.js"></script>
     <script src="js/scripts.js"></script>
-    <script src="js/hero.js"></script>
-    <script src="js/map.js"></script>
+    <script src="js/classes/town-buildings.js"></script>
+    <script src="js/components/move_to.js"></script>
+    <script src="js/components/grid.js"></script>
+    <script src="js/components/movement.js"></script>
+    <script src="js/components/resource.js"></script>
+    <script src="js/components/gold.js"></script>
+    <script src="js/components/wood.js"></script>
+    <script src="js/components/ore.js"></script>
+    <script src="js/components/mercury.js"></script>
+    <script src="js/components/sulphur.js"></script>
+    <script src="js/components/crystal.js"></script>
+    <script src="js/components/gem.js"></script>
+    <script src="js/components/river.js"></script>
+    <script src="js/components/road.js"></script>
+    <script src="js/components/landscape.js"></script>
+    <script src="js/components/chest.js"></script>
+    <script src="js/components/creature.js"></script>
+    <script src="js/components/town.js"></script>
+    <script src="js/components/object.js"></script>
+    <script src="js/components/mine.js"></script>
+    <script src="js/components/hero.js"></script>
+    <script src="js/scenes/loading.js"></script>
+    <script src="js/scenes/error.js"></script>
+    <script src="js/scenes/game.js"></script>
+    <script src="js/scenes/town.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/mapData.js"></script>
+    <script>
+        window.addEventListener('load', Game.start);
+    </script>
 </body>
 </html>
