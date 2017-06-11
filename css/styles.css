@@ -40,7 +40,7 @@
  */
 
 .tile--grass {
-    background-image: url('../images/tiles/grass.bmp');
+    background-image: url('../images/landscape/grass.png');
     cursor: url('../images/cursors/move.png'), default;
 }
 
@@ -54,7 +54,7 @@
  */
 
 .tile--water {
-    background-image: url('../images/tiles/water.bmp');
+    background-image: url('../images/landscape/water.png');
 }
 
 /* ПОВОРОТ */
@@ -201,67 +201,67 @@
 }
 
 .object--hero--alchemist {
-    background-image: url(../images/heroes/alchemist/frame_02.png);
+    background-image: url(../images/heroes/alchemist.png);
 }
 
 .object--hero--barbarian {
-    background-image: url(../images/heroes/barbarian/frame_02.png);
+    background-image: url(../images/heroes/barbarian.png);
 }
 
 .object--hero--battle-mage {
-    background-image: url(../images/heroes/battle_mage/frame_02.png);
+    background-image: url(../images/heroes/battle-mage.png);
 }
 
 .object--hero--beastmaster {
-    background-image: url(../images/heroes/beastmaster/frame_02.png);
+    background-image: url(../images/heroes/beastmaster.png);
 }
 
 .object--hero--cleric {
-    background-image: url(../images/heroes/cleric/frame_02.png);
+    background-image: url(../images/heroes/cleric.png);
 }
 
 .object--hero--death-knight {
-    background-image: url(../images/heroes/death_knight/frame_02.png);
+    background-image: url(../images/heroes/death-knight.png);
 }
 
 .object--hero--demoniac {
-    background-image: url(../images/heroes/demoniac/frame_02.png);
+    background-image: url(../images/heroes/demoniac.png);
 }
 
 .object--hero--druid {
-    background-image: url(../images/heroes/druid/frame_02.png);
+    background-image: url(../images/heroes/druid.png);
 }
 
 .object--hero--heretic {
-    background-image: url(../images/heroes/heretic/frame_02.png);
+    background-image: url(../images/heroes/heretic.png);
 }
 
 .object--hero--knight {
-    background-image: url(../images/heroes/knight/frame_02.png);
+    background-image: url(../images/heroes/knight.png);
 }
 
 .object--hero--necromancer {
-    background-image: url(../images/heroes/necromancer/frame_02.png);
+    background-image: url(../images/heroes/necromancer.png);
 }
 
 .object--hero--overlord {
-    background-image: url(../images/heroes/overlord/frame_02.png);
+    background-image: url(../images/heroes/overlord.png);
 }
 
 .object--hero--ranger {
-    background-image: url(../images/heroes/ranger/frame_02.png);
+    background-image: url(../images/heroes/ranger.png);
 }
 
 .object--hero--warlock {
-    background-image: url(../images/heroes/warlock/frame_02.png);
+    background-image: url(../images/heroes/warlock.png);
 }
 
 .object--hero--witch {
-    background-image: url(../images/heroes/witch/frame_02.png);
+    background-image: url(../images/heroes/witch.png);
 }
 
 .object--hero--wizard {
-    background-image: url(../images/heroes/wizard/frame_02.png);
+    background-image: url(../images/heroes/wizard.png);
 }
 
 /* temp */
