@@ -1,5 +1,5 @@
 Crafty.c('grid', {
-    init: function(){
+    init: function() {
         this.requires('2D, Canvas');
         //this.requires('2D, DOM'); // DEBUG
     },

@@ -68,7 +68,7 @@ Crafty.defineScene('Game', function() {
                     terrain = 'grass';
                     from = 64;
                     to = 67;
-                    angle = mapData.landscape.terrain[y][x] == CONST_LANDSCAPE_TILE_GRASS_VERTICAL_COAST_RIGHT ? 180 : 0;
+                    angle = mapData.landscape.terrain[y][x] === CONST_LANDSCAPE_TILE_GRASS_VERTICAL_COAST_RIGHT ? 180 : 0;
                     break;
                 // 68 - 71
                 case CONST_LANDSCAPE_TILE_GRASS_HORIZONTAL_COAST:
@@ -76,14 +76,14 @@ Crafty.defineScene('Game', function() {
                     terrain = 'grass';
                     from = 68;
                     to = 71;
-                    angle = mapData.landscape.terrain[y][x] == CONST_LANDSCAPE_TILE_GRASS_HORIZONTAL_COAST_DOWN ? 180 : 0;
+                    angle = mapData.landscape.terrain[y][x] === CONST_LANDSCAPE_TILE_GRASS_HORIZONTAL_COAST_DOWN ? 180 : 0;
                     break;
                 case CONST_LANDSCAPE_TILE_WATER_VERTICAL_COAST:
                 case CONST_LANDSCAPE_TILE_WATER_VERTICAL_COAST_RIGHT:
                     terrain = 'water';
                     from = 5;
                     to = 8;
-                    angle = mapData.landscape.terrain[y][x] == CONST_LANDSCAPE_TILE_WATER_VERTICAL_COAST_RIGHT ? 180 : 0;
+                    angle = mapData.landscape.terrain[y][x] === CONST_LANDSCAPE_TILE_WATER_VERTICAL_COAST_RIGHT ? 180 : 0;
                     break;
                 // 9 - 12
                 case CONST_LANDSCAPE_TILE_WATER_HORIZONTAL_COAST:
@@ -91,7 +91,7 @@ Crafty.defineScene('Game', function() {
                     terrain = 'water';
                     from = 9;
                     to = 12;
-                    angle = mapData.landscape.terrain[y][x] == CONST_LANDSCAPE_TILE_WATER_HORIZONTAL_COAST_DOWN ? 180 : 0;
+                    angle = mapData.landscape.terrain[y][x] === CONST_LANDSCAPE_TILE_WATER_HORIZONTAL_COAST_DOWN ? 180 : 0;
                     break;
                 // 13 - 16
                 case CONST_LANDSCAPE_TILE_WATER_CORNER_SMALL_NW:
