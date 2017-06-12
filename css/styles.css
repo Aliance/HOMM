@@ -7,4 +7,5 @@
 
 #container {
     display: inline-block;
+    cursor: url('../images/cursors/arrow.png'), default;
 }
